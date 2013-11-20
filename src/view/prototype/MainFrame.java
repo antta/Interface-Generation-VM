@@ -3,15 +3,24 @@ package view.prototype;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ActionListener{
 
 	//Header
 	private JLabel titre;
@@ -23,7 +32,8 @@ public class MainFrame extends JFrame {
 	private JLabel labDescription;
 	private JTextField description;
 	//liste paquets
-	public String[] mesPaquets = {"kiwi","Jenkins"};
+	public ArrayList<String> mesPaquets;
+	private DefaultListModel<String> monModel;
 	private JList<String> listePaquets;
 	//buttons sortie
 	private JButton annuler;
@@ -33,11 +43,13 @@ public class MainFrame extends JFrame {
 	private JPanel panelInfos;
 	private JPanel panelListe;
 	private JPanel panelButtons;
+	private JPanel panelTitre;
 	//listener
 
 	public MainFrame (){
 
-		this.setSize(400, 500);
+		this.setTitle("Config.xml");
+		this.setSize(400, 300);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.initialise();
 		this.setVisible(true);
@@ -56,16 +68,34 @@ public class MainFrame extends JFrame {
 		nomvm = new JTextField();
 		description = new JTextField();
 
-		//liste paquet
-		listePaquets = new JList<>(mesPaquets);
+		//initialise la liste paquet depuis l'arraylist
+		mesPaquets = new ArrayList<String>();
+		mesPaquets.add("kiwi");
+		mesPaquets.add("Jenkins");
+		mesPaquets.add("Java");
+		mesPaquets.add("Zypper");
+		mesPaquets.add("Yast");
+
+		monModel = new DefaultListModel<String>();
+		listePaquets = new JList<String>(monModel);
+		for (String unPaquet : mesPaquets)
+			monModel.addElement(unPaquet);
+		listePaquets.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
 
 		//buttons
 		annuler = new JButton("Annuler");
 		valider = new JButton("Valider");
 
+		//init du panel titre
+		panelTitre = new JPanel();
+		panelTitre.setLayout(new FlowLayout());
 		//init du panel info
 		panelInfos = new JPanel();
-		panelInfos.setLayout(new GridLayout(3,3));		
+		panelInfos.setLayout(new GridLayout(3,3));
+		//init du panel Liste
+		panelListe = new JPanel();
+		panelListe.setLayout(new BorderLayout());
 		//init du panel general
 		panelGeneral = new JPanel();
 		panelGeneral.setLayout(new BorderLayout());
@@ -74,7 +104,8 @@ public class MainFrame extends JFrame {
 		panelButtons.setLayout(new FlowLayout());
 
 		//ajout des differents panels
-		panelGeneral.add(titre,BorderLayout.NORTH);
+		panelTitre.add(titre);
+		panelGeneral.add(panelTitre,BorderLayout.NORTH);
 
 		panelInfos.add(labAuteur);
 		panelInfos.add(auteur);
@@ -82,24 +113,43 @@ public class MainFrame extends JFrame {
 		panelInfos.add(nomvm);
 		panelInfos.add(labDescription);
 		panelInfos.add(description);
-		panelGeneral.add(panelInfos,BorderLayout.CENTER);
+		panelListe.add(panelInfos,BorderLayout.NORTH);
 
-		panelGeneral.add(listePaquets,BorderLayout.CENTER);
-		
-		
+		panelListe.add(listePaquets,BorderLayout.SOUTH);
+		panelGeneral.add(panelListe,BorderLayout.CENTER);
+
 		panelButtons.add(annuler);
 		panelButtons.add(valider);
 		panelGeneral.add(panelButtons,BorderLayout.SOUTH);
 
-		this.setContentPane(panelGeneral);
-		
-		//titre.setBounds(10, 50, 200, 50);
-		panelInfos.setBounds(0, 0, 300, 300);
+		panelListe.add(new JScrollPane(listePaquets));
 
+		this.setContentPane(panelGeneral);
+
+		//ajout des listeners
+		annuler.addActionListener(this);
+		valider.addActionListener(this);
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if(e.getSource() == annuler)
+			this.dispose();
+		if(e.getSource() == valider){
+
+			String infos = "Auteur : "+auteur.getText()+"\nNom VM : "+nomvm.getText()+"\nDescription : "+description.getText()+"\n";
+			List<String> paquetsSelectionnés = listePaquets.getSelectedValuesList();
+			for (String unPaquet : paquetsSelectionnés)
+				infos += unPaquet+", ";
+			JOptionPane.showMessageDialog(null, infos);
+		}
 	}
 
 	public static void main (String[] args){
 
 		MainFrame maFen = new MainFrame();
 	}
+
 }
