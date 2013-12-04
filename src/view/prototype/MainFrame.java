@@ -60,11 +60,12 @@ public class MainFrame extends JFrame implements ActionListener{
 
 		//initialise la liste paquet depuis l'arraylist
 		mesPaquets = new ArrayList<String>();
-		mesPaquets.add("kiwi");
-		mesPaquets.add("Jenkins");
-		mesPaquets.add("Java");
-		mesPaquets.add("Zypper");
-		mesPaquets.add("Yast");
+		mesPaquets.add("tar");
+		mesPaquets.add("geany");
+		mesPaquets.add("gedit");
+		mesPaquets.add("wget");
+		mesPaquets.add("openssh");
+        mesPaquets.add("lynx");
 
 		monModel = new DefaultListModel<String>();
 		listePaquets = new JList<String>(monModel);
