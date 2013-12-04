@@ -3,6 +3,18 @@ package engine;
 public class XMLParser {
 	
 	public XMLParser() {
-		//constructor
+
 	}
+
+    public void save(){
+
+    }
+
+    public void createNew(){
+
+    }
+
+    public void open(){
+
+    }
 }
