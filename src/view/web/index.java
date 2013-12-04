@@ -1,5 +1,4 @@
 package view.web;
-
-public class index {
+public class index {//extends Servlet{
 
 }
