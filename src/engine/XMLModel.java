@@ -2,11 +2,10 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collection;
 
+import org.jdom2.Attribute;
 import org.jdom2.Content;
 import org.jdom2.Element;
-import org.jdom2.Attribute;
 
 /**
  * Created with IntelliJ IDEA.
@@ -194,8 +193,8 @@ public class XMLModel {
 	}
 	
 	/**
-	 * Fonction tampon, appelle toutes les fonctions necessaires à la creation d'un config.xml
-	 * Elle utilise les fonctions suivantes : 
+	 * function who regroup all creating function
+	 * it use those function : 
 	 * 		createAllElement();
 	 * 		assignAllAttributes();
 	 * 		addAllContent();
@@ -209,6 +208,11 @@ public class XMLModel {
     	addAllContent();
     }
     
+    /**
+     * Create all the element of XML, instanciate all the element of class
+     * 
+     * @author nicolas
+     */
 	private void createAllElement(){
     	
     	image = new Element(tag_image);
@@ -234,6 +238,11 @@ public class XMLModel {
     		user = new Element(tag_user);
     }
     
+	/**
+	 * add a new attribute in the attribute's list then add list to element
+	 * 
+	 * @author nicolas
+	 */
     private void assignAllAttributes(){
     	
     	attribute_image.add(new Attribute("name","SuseAxway"));
@@ -321,6 +330,11 @@ public class XMLModel {
     	
     }
     
+    /**
+     * add content to element's content list then add content to element
+     * 
+     * @author nicolas
+     */
     private void addAllContent() {
 		
     	content_image.add(description);
@@ -333,8 +347,8 @@ public class XMLModel {
     	content_description.add(specification);
     	description.addContent(content_description);
     	
-    	author.addContent("Challut Nicolas");
-    	contact.addContent("nchal@etu.univ-savoie.fr");
+    	author.addContent("VM'owner");
+    	contact.addContent("owner@domain.com");
     	specification.addContent("Tiny Suse");
     	
     	content_preferences.add(type);
