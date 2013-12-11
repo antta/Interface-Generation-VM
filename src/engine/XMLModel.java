@@ -375,6 +375,28 @@ public class XMLModel {
     	
 	}
 
+    /**
+     * setAuthor
+     *
+     * Fill the /image/description/author field with the given author
+     *
+     * @param author The author name to be set
+     */
+    public void setAuthor(String author){
+        this.image.getChild(tag_description).getChild(tag_author).addContent(author);
+    }
+
+    /**
+     * set
+     *
+     * Fill the /image/description/author field with the given author
+     *
+     * @param mail The mail to be set
+     */
+    public void setAuthorMail(String mail){
+        this.image.getChild(tag_description).getChild(tag_contact).addContent(mail);
+    }
+
     public Element fileRepresentationRoot(){
         return this.image;
     }

@@ -34,7 +34,8 @@ public class XMLParser {
      * Private constructor used by the factories to create new XMLParser
      */
 	private XMLParser() {
-        this.open();
+        //this.open();
+        this.xmlModel = new XMLModel();
 	}
 
     /**
