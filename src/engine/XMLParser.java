@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Class XMLParser
  *
- * V0.0.0.1 pre alpha
+ * V0.0.0.2 pre alpha
  *
  * Just a prototype to modify an existing xml file
  * addPackage will be remove or reimplemented, indeed most of function are likely hard coded
@@ -25,7 +25,7 @@ import java.io.IOException;
 public class XMLParser {
 
     private static String xmlPath = "config.xml";
-    private XMLModel xmlModel;
+    public XMLModel xmlModel;
     private Element root;
 
     /**
@@ -34,7 +34,8 @@ public class XMLParser {
      * Private constructor used by the factories to create new XMLParser
      */
 	private XMLParser() {
-        this.open();
+        //this.open();
+        this.xmlModel = new XMLModel();
 	}
 
     /**
@@ -110,6 +111,7 @@ public class XMLParser {
 
     public static void main(String[] args){
         XMLParser parser = XMLParser.createEmptyConfig();
+        parser.xmlModel.setAuthor("Patrick-Edouard");
         parser.save();
     }
 }
