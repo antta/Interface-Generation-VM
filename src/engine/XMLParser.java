@@ -57,6 +57,10 @@ public class XMLParser {
     public void save(){
         try
         {
+        	File file = new File(XMLParser.xmlPath);
+        	if(!file.exists()){
+        		file.createNewFile();
+        	}
             XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
             out.output(this.xmlModel.fileRepresentationRoot(), new FileOutputStream(XMLParser.xmlPath));
         }

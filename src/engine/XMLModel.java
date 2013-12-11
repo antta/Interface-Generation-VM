@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
+import org.jdom2.Content;
 import org.jdom2.Element;
 import org.jdom2.Attribute;
 
@@ -134,14 +135,6 @@ public class XMLModel {
     	private Element users;
     		private Element user;
     		
-		
-		//Collection<Content> myPackages;
-		private ArrayList<ArrayList<Element>> myPackages;
-			private ArrayList<Element> myPackage;
-        //Collection<Content> myRepository;
-            //Element repository1;
-            //Element repository;
-
 
     private String tag_image = "image";
     private String tag_description = "description";
@@ -187,6 +180,12 @@ public class XMLModel {
 	private List<Attribute> attribute_users = new ArrayList<Attribute>();
 	private List<Attribute> attribute_user = new ArrayList<Attribute>();
 	
+	private List<Content> content_image = new ArrayList<Content>();
+	private List<Content> content_description = new ArrayList<Content>();
+	private List<Content> content_preferences = new ArrayList<Content>();
+	private List<Content> content_type = new ArrayList<Content>();
+	private List<Content> content_machine = new ArrayList<Content>();
+	
 	
 	public XMLModel(){
 		
@@ -201,8 +200,8 @@ public class XMLModel {
         //myPackages = new ArrayList<Content>();
     	createAllElement();
     	assignAllAttributes();
-
-
+    	addAllContent();
+    	
         //Create the sub tree and modify it as you wish : adding children, name, attributes
         //packages1 = new Element(balise_packages);
         //packages1.setAttribute("attributeName","attributeContent");
@@ -213,7 +212,7 @@ public class XMLModel {
 
     }
     
-    private void createAllElement(){
+	private void createAllElement(){
     	
     	image = new Element(tag_image);
 		description = new Element(tag_description);
@@ -322,10 +321,59 @@ public class XMLModel {
     	attribute_user.add(new Attribute("home","/root"));
     	attribute_user.add(new Attribute("shell","/bin/bash"));
     	user.setAttributes(attribute_user);
-
-    	
     	
     }
+    
+    private void addAllContent() {
+		
+    	content_image.add(description);
+    	content_image.add(preferences);
+    	content_image.add(users);
+    	image.addContent(content_image);
+    	
+    	content_description.add(author);
+    	content_description.add(contact);
+    	content_description.add(specification);
+    	description.addContent(content_description);
+    	
+    	author.addContent("Challut Nicolas");
+    	contact.addContent("nchal@etu.univ-savoie.fr");
+    	specification.addContent("Tiny Suse");
+    	
+    	content_preferences.add(type);
+        content_preferences.add(version);
+        content_preferences.add(packagemanager);
+        content_preferences.add(rpmchecksignatures);
+        content_preferences.add(rpmforce);
+        content_preferences.add(boottheme);
+        content_preferences.add(timezone);
+        content_preferences.add(hwclock);
+        preferences.addContent(content_preferences);
+        
+        content_type.add(machine);
+        content_type.add(size);
+        type.addContent(content_type);
+        
+        size.addContent("16384");
+        
+        content_machine.add(vmdisk);
+        content_machine.add(vmdvd);
+        content_machine.add(vmnic);
+        machine.addContent(content_machine);
+
+        version.addContent("1.0.0");
+        packagemanager.addContent("zypper");
+        rpmchecksignatures.addContent("false");
+        rpmforce.addContent("false");
+        boottheme.addContent("studio");
+        timezone.addContent("UTC");
+        hwclock.addContent("localtime");
+        
+        
+        
+        
+    	
+	}
 
     public Element fileRepresentationRoot(){
         return this.image;
