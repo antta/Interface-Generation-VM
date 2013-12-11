@@ -121,7 +121,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		annuler.addActionListener(this);
 		valider.addActionListener(this);
 
-        this.xmlParser = new XMLParser();
+        this.xmlParser = XMLParser.createEmptyConfig();
 	}
 
 	@Override

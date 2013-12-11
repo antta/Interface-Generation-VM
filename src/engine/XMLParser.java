@@ -19,38 +19,57 @@ import java.io.IOException;
  * Just a prototype to modify an existing xml file
  * addPackage will be remove or reimplemented, indeed most of function are likely hard coded
  *
+ *
  * @author Patrick-Edouard Roux
  */
 public class XMLParser {
 
     private static String xmlPath = "config.xml";
+    private XMLModel xmlModel;
     private Element root;
 
     /**
      * XMLParser
      *
-     * Constructor
+     * Private constructor used by the factories to create new XMLParser
      */
-	public XMLParser() {
+	private XMLParser() {
         this.open();
 	}
 
     /**
+     * createEmptyConfig
+     *
+     * A factory that create a new empty XML configuration.
+     *
+     *
+     * @return A new instance of XMLParser
+     */
+    public static XMLParser createEmptyConfig(){
+        return new XMLParser();
+    }
+
+    /**
      * save
      *
-     * Save the current xml file
+     * Save the current configuration into the concrete xml file.
      */
     public void save(){
         try
         {
-            XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-            sortie.output(this.root, new FileOutputStream(XMLParser.xmlPath));
+            XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
+            out.output(this.xmlModel.fileRepresentationRoot(), new FileOutputStream(XMLParser.xmlPath));
         }
-        catch (java.io.IOException e){}
+        catch (java.io.IOException e){
+            e.printStackTrace();
+        }
     }
 
+    /**
+     *
+     */
     public void createNew(){
-
+        this.xmlModel = new XMLModel();
     }
 
     /**
@@ -58,6 +77,7 @@ public class XMLParser {
      *
      * Add the given package
      */
+    @Deprecated
     public void addPackage(String packageName){
         Attribute newPackage = new Attribute("name", packageName);
         Element packages = this.root.getChild("packages");

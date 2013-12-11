@@ -1,6 +1,10 @@
 package engine;
 
+import org.jdom2.Content;
 import org.jdom2.Element;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
@@ -101,9 +105,46 @@ import org.jdom2.Element;
  *    </repository>
  *    </image>
  *
+ *  @see 'http://doc.opensuse.org/projects/kiwi/schema-doc/'
+ *  @see 'http://doc.opensuse.org/projects/kiwi/doc/#sec.description.config.xml'
  */
 
 public class XMLModel {
     Element image;
+        Element description;
+        Element preferences;
+        Element users;
+        Collection<Content> myPackages;
+            Element packages1;
+                Element firstPackage;
+                Element secondPackage;
+           Element packages;
+        Collection<Content> myRepository;
+            Element repository1;
+            Element repository;
 
+
+
+
+
+    private String balise_packages = "packages";
+
+    private void createTree(){
+        //Sample of a collection to create multiple instance of 'packages'
+
+        //Create a list of 'content' (Element extends content)
+        myPackages = new ArrayList<Content>();
+
+        //Create the sub tree and modify it as you wish : adding children, name, attributes
+        packages1 = new Element(balise_packages);
+        packages1.setAttribute("attributeName","attributeContent");
+        myPackages.add(packages1);
+        myPackages.add(packages);
+        packages.addContent(myPackages);
+
+    }
+
+    public Element fileRepresentationRoot(){
+        return this.image;
+    }
 }
