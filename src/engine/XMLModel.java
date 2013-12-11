@@ -180,11 +180,12 @@ public class XMLModel {
 	private List<Attribute> attribute_users              = new ArrayList<Attribute>();
 	private List<Attribute> attribute_user               = new ArrayList<Attribute>();
 	
-	private List<Content> content_image                  = new ArrayList<Content>();
-	private List<Content> content_description            = new ArrayList<Content>();
-	private List<Content> content_preferences            = new ArrayList<Content>();
-	private List<Content> content_type                   = new ArrayList<Content>();
-	private List<Content> content_machine                = new ArrayList<Content>();
+	private List<Content> content_image = new ArrayList<Content>();
+	private List<Content> content_description = new ArrayList<Content>();
+	private List<Content> content_preferences = new ArrayList<Content>();
+	private List<Content> content_type = new ArrayList<Content>();
+	private List<Content> content_machine = new ArrayList<Content>();
+	private List<Content> content_users = new ArrayList<Content>();
 	
 	
 	public XMLModel(){
@@ -192,24 +193,20 @@ public class XMLModel {
 		createTree();
 	}
 	
-
+	/**
+	 * Fonction tampon, appelle toutes les fonctions necessaires à la creation d'un config.xml
+	 * Elle utilise les fonctions suivantes : 
+	 * 		createAllElement();
+	 * 		assignAllAttributes();
+	 * 		addAllContent();
+	 * 
+	 *@author nicolas
+	 */
     private void createTree(){
-        //Sample of a collection to create multiple instance of 'packages'
 
-        //Create a list of 'content' (Element extends content)
-        //myPackages = new ArrayList<Content>();
     	createAllElement();
     	assignAllAttributes();
     	addAllContent();
-    	
-        //Create the sub tree and modify it as you wish : adding children, name, attributes
-        //packages1 = new Element(balise_packages);
-        //packages1.setAttribute("attributeName","attributeContent");
-        //packages1.addContent(this.firstPackage);
-        //myPackages.add(packages1);
-        //myPackages.add(packages);
-        //packages.addContent(myPackages);
-
     }
     
 	private void createAllElement(){
@@ -369,10 +366,9 @@ public class XMLModel {
         timezone.addContent("UTC");
         hwclock.addContent("localtime");
         
-        
-        
-        
-    	
+        content_users.add(user);
+        users.addContent(content_users);
+        	
 	}
 
     /**
