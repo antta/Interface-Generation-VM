@@ -247,16 +247,16 @@ public class XMLModel {
     	attribute_description.add(new Attribute("type","system"));
     	description.setAttributes(attribute_description);
     	
-    	attribute_author.add(new Attribute(null,null));
+    	//attribute_author.add(new Attribute(null,null));
     	author.setAttributes(attribute_author);
-    	
-    	attribute_contact.add(new Attribute(null,null));
+
+        //attribute_contact.add(new Attribute(null,null));
     	contact.setAttributes(attribute_contact);
-    	
-    	attribute_specification.add(new Attribute(null, null));
+
+        //attribute_specification.add(new Attribute(null, null));
     	specification.setAttributes(attribute_specification);
-    	
-    	attribute_preferences.add(new Attribute(null, null));
+
+        //attribute_preferences.add(new Attribute(null, null));
     	preferences.setAttributes(attribute_preferences);
     	
     	attribute_type.add(new Attribute("checkprebuilt", "true"));
@@ -281,7 +281,7 @@ public class XMLModel {
     	
     	attribute_vmdvd.add(new Attribute("controller", "ide"));
     	attribute_vmdvd.add(new Attribute("id", "0"));
-    	vmdvd.setAttributes(attribute_vmdisk);
+    	vmdvd.setAttributes(attribute_vmdvd);
 
         attribute_vmnic.add(new Attribute("driver", "e1000"));
         attribute_vmnic.add(new Attribute("interface", "0"));
@@ -292,25 +292,25 @@ public class XMLModel {
         attribute_size.add(new Attribute("additive", "false"));
         size.setAttributes(attribute_size);
         
-    	attribute_version.add(new Attribute(null, null));
+    	//attribute_version.add(new Attribute(null, null));
     	version.setAttributes(attribute_version);
-    	  	
-    	attribute_packagemanager.add(new Attribute(null, null));
+
+        //attribute_packagemanager.add(new Attribute(null, null));
     	packagemanager.setAttributes(attribute_packagemanager);
-    	
-    	attribute_rpmchecksignatures.add(new Attribute(null, null));
+
+        //attribute_rpmchecksignatures.add(new Attribute(null, null));
     	rpmchecksignatures.setAttributes(attribute_rpmchecksignatures);
-    	
-    	attribute_rpmforce.add(new Attribute(null, null));
+
+        //attribute_rpmforce.add(new Attribute(null, null));
     	rpmforce.setAttributes(attribute_rpmforce);
-    	
-    	attribute_boottheme.add(new Attribute(null, null));
+
+        //attribute_boottheme.add(new Attribute(null, null));
     	boottheme.setAttributes(attribute_boottheme);
-    	
-    	attribute_timezone.add(new Attribute(null, null));
+
+        //attribute_timezone.add(new Attribute(null, null));
     	timezone.setAttributes(attribute_timezone);
-    	
-    	attribute_hwclock.add(new Attribute(null, null));
+
+        //attribute_hwclock.add(new Attribute(null, null));
     	hwclock.setAttributes(attribute_hwclock);
 
     	attribute_users.add(new Attribute("group", "root"));
@@ -383,7 +383,7 @@ public class XMLModel {
      * @param author The author name to be set
      */
     public void setAuthor(String author){
-        this.image.getChild(tag_description).getChild(tag_author).addContent(author);
+        this.image.getChild(tag_description).getChild(tag_author).setText(author);
     }
 
     /**
@@ -394,7 +394,7 @@ public class XMLModel {
      * @param mail The mail to be set
      */
     public void setAuthorMail(String mail){
-        this.image.getChild(tag_description).getChild(tag_contact).addContent(mail);
+        this.image.getChild(tag_description).getChild(tag_contact).setText(mail);
     }
 
     public Element fileRepresentationRoot(){
