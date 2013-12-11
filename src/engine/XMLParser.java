@@ -103,4 +103,9 @@ public class XMLParser {
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args){
+        XMLParser parser = XMLParser.createEmptyConfig();
+        parser.save();
+    }
 }
