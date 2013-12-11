@@ -180,12 +180,12 @@ public class XMLModel {
 	private List<Attribute> attribute_users              = new ArrayList<Attribute>();
 	private List<Attribute> attribute_user               = new ArrayList<Attribute>();
 	
-	private List<Content> content_image = new ArrayList<Content>();
-	private List<Content> content_description = new ArrayList<Content>();
-	private List<Content> content_preferences = new ArrayList<Content>();
-	private List<Content> content_type = new ArrayList<Content>();
-	private List<Content> content_machine = new ArrayList<Content>();
-	private List<Content> content_users = new ArrayList<Content>();
+	private List<Content> content_image                  = new ArrayList<Content>();
+	private List<Content> content_description            = new ArrayList<Content>();
+	private List<Content> content_preferences            = new ArrayList<Content>();
+	private List<Content> content_type                   = new ArrayList<Content>();
+	private List<Content> content_machine                = new ArrayList<Content>();
+	private List<Content> content_users                  = new ArrayList<Content>();
 	
 	
 	public XMLModel(){
