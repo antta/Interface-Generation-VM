@@ -1,0 +1,49 @@
+<image name="SuseAxway" displayname="SuseAxway" schemaversion="5.2">
+  <description type="system">
+    <author>Patrick-Edouard</author>
+    <contact>owner@domain.com</contact>
+    <specification>Tiny Suse</specification>
+  </description>
+  <preference>
+    <type checkprebuilt="true" boot="vmxboot/suse-12.3" fsnocheck="true" filesystem="ext3" bootloader="grub2" primary="true" format="vmdk" kernelcmdline="quiet" image="vmx">
+      <machine memory="1024" arch="x86_64" guestOS="suse-64">
+        <vmdisk controller="scsi" id="0" />
+        <vmdvd controller="ide" id="0" />
+        <vmnic driver="e1000" interface="0" mode="bridged" />
+      </machine>
+      <size unit="M" additive="false">16384</size>
+    </type>
+    <version>1.0.0</version>
+    <packagemanager>zypper</packagemanager>
+    <rpm-check-manager>false</rpm-check-manager>
+    <rpm-force>false</rpm-force>
+    <boot-theme>studio</boot-theme>
+    <timezone>UTC</timezone>
+    <hwclock>localtime</hwclock>
+  </preference>
+  <users group="root">
+    <user name="root" pwd="$1$O18RH8FB$Hg7xawIuJlQzLfawBKb/H1" home="/root" shell="/bin/bash" />
+  </users>
+  <packages type="image" patternType="onlyRequired">
+    <package name="kiwi-desc-vmxboot" />
+    <package name="kiwi-desc-netboot-requires" />
+    <package name="kiwi-image-livecd-kde-snapshot" />
+    <package name="kiwi-image-livecd-x11-snapshot" />
+    <package name="kiwi-image-livecd-gnome-snapshot" />
+    <package name="kiwi-desc-vmxboot-requires" />
+    <package name="kiwi-desc-oemboot-requires" />
+    <package name="kiwi-instsource-plugins-openSUSE-12-1" />
+    <package name="kiwi-desc-isoboot-requires" />
+    <package name="kiwi-media-requires" />
+    <package name="kiwi-templates" />
+    <package name="kiwi-instsource" />
+    <package name="kiwi-doc" />
+    <package name="kiwi-tools" />
+    <package name="kiwi-desc-oemboot" />
+    <package name="kiwi-config-openSUSE" />
+    <package name="kiwi-desc-netboot" />
+    <package name="kiwi-pxeboot" />
+    <package name="kiwi-desc-isoboot" />
+    <package name="kiwi" />
+  </packages>
+</image>
