@@ -105,6 +105,25 @@ import org.jdom2.Element;
  *    <source path="http://pkg.jenkins-ci.org/opensuse/"/>
  *    </repository>
  *    </image>
+ *    
+ *    JeOS : 
+ *    <package name="aaa_base"/>
+ *	  <package name="branding-openSUSE"/>
+		<package name="patterns-openSUSE-base"/>
+		<package name="grub2"/>
+	<package name="hwinfo"/>
+	<package name="iputils"/>
+	<package name="kernel-default"/>
+	<package name="netcfg"/>
+	<package name="openSUSE-build-key"/>
+	<package name="openssh"/>
+	<package name="plymouth"/>
+	<package name="polkit-default-privs"/>
+	<package name="rpcbind"/>
+	<package name="syslog-ng"/>
+	<package name="vim"/>
+	<package name="zypper"/>
+	<package name="timezone"/>
  *
  *  @see 'http://doc.opensuse.org/projects/kiwi/schema-doc/'
  *  @see 'http://doc.opensuse.org/projects/kiwi/doc/#sec.description.config.xml'
@@ -134,8 +153,11 @@ public class XMLModel {
     	private Element users;
     		private Element user;
     	private Element packages;
+    	private List<Element> listPackagesType = new ArrayList<Element>();
+    	private List<Element> listPackages = new ArrayList<Element>();
+    	private List<Element> listRepo = new ArrayList<Element>();
     	
-    //private List<Element> listPackage = new ArrayList<Element>();
+    //private List<String> listPackage = new ArrayList<String>();
 
     private String tag_image              	= "image";
     private String tag_description        	= "description";
@@ -244,7 +266,8 @@ public class XMLModel {
     	users = new Element(tag_users);
     		user = new Element(tag_user);
     	packages = new Element(tag_packages);
-    		fillInPackageList();
+    		createPackagesImage();
+    		createPackagesBootstrap();
     		
     }
 	
@@ -338,9 +361,11 @@ public class XMLModel {
     	attribute_user.add(new Attribute("shell","/bin/bash"));
     	user.setAttributes(attribute_user);
     	
-    	attribute_packages.add(new Attribute("type", "image"));
-    	attribute_packages.add(new Attribute("patternType", "onlyRequired"));
-    	packages.setAttributes(attribute_packages);
+    	//attribute_packages.add(new Attribute("type", "image"));
+    	//attribute_packages.add(new Attribute("patternType", "onlyRequired"));
+    	//packages.setAttributes(attribute_packages);
+    	
+    	
     	
     }
     
@@ -354,7 +379,8 @@ public class XMLModel {
     	content_image.add(description);
     	content_image.add(preferences);
     	content_image.add(users);
-    	content_image.add(packages);
+    	//content_image.add(packages);
+    	content_image.addAll(listPackagesType);
     	image.addContent(content_image);
     	
     	content_description.add(author);
@@ -398,42 +424,120 @@ public class XMLModel {
         content_users.add(user);
         users.addContent(content_users);
         
-        packages.addContent(content_packages);
+        //packages.addContent(content_packages);
         	
 	}
     
     
-	private void fillInPackageList(){
-
-		ArrayList<String> listAttributPackage = new ArrayList<String>();
-		listAttributPackage.add("kiwi-desc-vmxboot");
-		listAttributPackage.add("kiwi-desc-netboot-requires");
-		listAttributPackage.add("kiwi-image-livecd-kde-snapshot");
-		listAttributPackage.add("kiwi-image-livecd-x11-snapshot");
-		listAttributPackage.add("kiwi-image-livecd-gnome-snapshot");
-		listAttributPackage.add("kiwi-desc-vmxboot-requires");
-		listAttributPackage.add("kiwi-desc-oemboot-requires");
-		listAttributPackage.add("kiwi-instsource-plugins-openSUSE-12-1");
-		listAttributPackage.add("kiwi-desc-isoboot-requires");
-		listAttributPackage.add("kiwi-media-requires");
-		listAttributPackage.add("kiwi-templates");
-		listAttributPackage.add("kiwi-instsource");
-		listAttributPackage.add("kiwi-doc");
-		listAttributPackage.add("kiwi-tools");
-		listAttributPackage.add("kiwi-desc-oemboot");
-		listAttributPackage.add("kiwi-config-openSUSE");
-		listAttributPackage.add("kiwi-desc-netboot");
-		listAttributPackage.add("kiwi-pxeboot");
-		listAttributPackage.add("kiwi-desc-isoboot");
-		listAttributPackage.add("kiwi");
-		
-		for (String attributPackage : listAttributPackage){
+    private void createPackagesImage(){
+    	
+    	List<String> listPackage = new ArrayList<String>();
+    	List<Attribute> listAttribute = new ArrayList<Attribute>();
+    	List<Content> listContent = new ArrayList<Content>();
+    	
+    	listPackage.addAll(corePackages());
+    	//this.kiwiPackages();
+    	
+    	
+		for (String attributPackage : listPackage){
 			Element packageTemp = new Element(tag_myPackage); 
 			packageTemp.setAttribute(new Attribute("name", attributPackage));
-			content_packages.add(packageTemp);
+			listPackages.add(packageTemp);
+			listContent.add(packageTemp);
 		}
 		
+		Element elemTemp = new Element(tag_packages);
+		listAttribute.add(new Attribute("type","image"));
+		listAttribute.add(new Attribute("patternType","onlyRequired"));
+		elemTemp.setAttributes(listAttribute);
+		elemTemp.addContent(listContent);
+		listPackagesType.add(elemTemp);
+		
+    }
+    
+    private void createPackagesBootstrap(){
+    	
+    	List<String> listPackage = new ArrayList<String>();
+
+    	List<Attribute> listAttribute = new ArrayList<Attribute>();
+    	List<Content> listContent = new ArrayList<Content>();
+    		
+    	listPackage.addAll(bootstrapPackages());
+
+    	
+		for (String attributPackage : listPackage){
+			Element packageTemp = new Element(tag_myPackage); 
+			packageTemp.setAttribute(new Attribute("name", attributPackage));
+			listPackages.add(packageTemp);
+			listContent.add(packageTemp);
+		}
+		
+		Element elemTemp = new Element(tag_packages);
+		listAttribute.add(new Attribute("type","bootstrap"));
+		elemTemp.setAttributes(listAttribute);
+		elemTemp.addContent(listContent);
+		listPackagesType.add(elemTemp);
+    }
+    
+    private List<String> corePackages(){
+ 
+	    List<String> listTemp = new ArrayList<String>();
+    	listTemp.add("aaa_base");
+	    listTemp.add("branding-openSUSE");
+		listTemp.add("patterns-openSUSE-base");
+		listTemp.add("grub2");
+		listTemp.add("hwinfo");
+		listTemp.add("iputils");
+		listTemp.add("kernel-default");
+		listTemp.add("netcfg");
+		listTemp.add("openSUSE-build-key");
+		listTemp.add("openssh");
+		listTemp.add("plymouth");
+		listTemp.add("polkit-default-privs");
+		listTemp.add("rpcbind");
+		listTemp.add("syslog-ng");
+		listTemp.add("vim");
+		listTemp.add("zypper");
+		listTemp.add("timezone");
+		return listTemp;
+    }
+    
+	private List<String> kiwiPackages(){
+
+	    List<String> listTemp = new ArrayList<String>();
+		listTemp.add("kiwi-desc-vmxboot");
+		listTemp.add("kiwi-desc-netboot-requires");
+		listTemp.add("kiwi-image-livecd-kde-snapshot");
+		listTemp.add("kiwi-image-livecd-x11-snapshot");
+		listTemp.add("kiwi-image-livecd-gnome-snapshot");
+		listTemp.add("kiwi-desc-vmxboot-requires");
+		listTemp.add("kiwi-desc-oemboot-requires");
+		listTemp.add("kiwi-instsource-plugins-openSUSE-12-1");
+		listTemp.add("kiwi-desc-isoboot-requires");
+		listTemp.add("kiwi-media-requires");
+		listTemp.add("kiwi-templates");
+		listTemp.add("kiwi-instsource");
+		listTemp.add("kiwi-doc");
+		listTemp.add("kiwi-tools");
+		listTemp.add("kiwi-desc-oemboot");
+		listTemp.add("kiwi-config-openSUSE");
+		listTemp.add("kiwi-desc-netboot");
+		listTemp.add("kiwi-pxeboot");
+		listTemp.add("kiwi-desc-isoboot");
+		listTemp.add("kiwi");
+		return listTemp;
 	}
+	
+	private List<String> bootstrapPackages(){
+		
+		List<String> listTemp = new ArrayList<String>();
+		listTemp.add("filesystem");
+		listTemp.add("glibc-locale");
+		listTemp.add("module-init-tools");
+		return listTemp;
+	}
+	
+	
 
     /**
      * setAuthor
