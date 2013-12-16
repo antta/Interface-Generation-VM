@@ -383,7 +383,7 @@ public class XMLModel {
     }
 
     /**
-     * set
+     * setAuthorMail
      *
      * Fill the /image/description/author field with the given author
      *
@@ -391,6 +391,17 @@ public class XMLModel {
      */
     public void setAuthorMail(String mail){
         this.image.getChild(tag_description).getChild(tag_contact).setText(mail);
+    }
+
+    /**
+     * setSpecification
+     *
+     * Fill the /image/description/author field with the given author
+     *
+     * @param specification The mail to be set
+     */
+    public void setSpecification(String specification){
+        this.image.getChild(tag_description).getChild(tag_specification).setText(specification);
     }
 
     public Element fileRepresentationRoot(){
