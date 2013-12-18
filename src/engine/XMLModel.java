@@ -1,6 +1,7 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.jdom2.Attribute;
@@ -543,7 +544,53 @@ public class XMLModel {
             for(Attribute a : e.getAttributes()){
                 if(a.getName().equals("type")) {
                     if(a.getValue().equals(packageType)) {
-                        e.addContent(new Element(tag_packages).setAttribute("name",packageName));
+                        e.addContent(new Element(this.tag_packages).setAttribute("name",packageName));
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * addPackage
+     *
+     * Add a package with the given packageType
+     *
+     * @param packageName the name of the package used on the repository
+     * @param groupType ex root ect
+     * @param userAttributes must have name, pwd, home, shell
+     */
+    public void addUser(String packageName, String groupType, Collection<Attribute> userAttributes){
+        List<Element> packagesList = this.image.getChildren("users");
+        for(Element e : packagesList){
+            for(Attribute a : e.getAttributes()){
+                if(a.getName().equals("group")) {
+                    if(a.getValue().equals(groupType)) {
+                        e.addContent(new Element(this.tag_user).setAttributes(userAttributes));
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+
+    /**
+     * addRepository
+     *
+     * Add a repository with the given repositoryType
+     *
+     * @param repositoryURL the name of the package used on the repository
+     * @param repositoryType see http://doc.opensuse.org/projects/kiwi/doc/#sec.description.repository
+     */
+    public void addRepository(String repositoryURL, String repositoryType){
+        List<Element> packagesList = this.image.getChildren("packages");
+        for(Element e : packagesList){
+            for(Attribute a : e.getAttributes()){
+                if(a.getName().equals("type")) {
+                    if(a.getValue().equals(repositoryType)) {
+                        e.addContent(new Element(this.tag_repository).setAttribute("path",repositoryURL));
                         return;
                     }
                 }
