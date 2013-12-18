@@ -182,6 +182,8 @@ public class XMLModel {
 	private String tag_user               	= "user";
 	private String tag_packages				= "packages";
 	private String tag_myPackage			= "package";
+	private String tag_repository			= "repository";
+	private String tag_source				= "source";
 	
 	private List<Attribute> attribute_image				= new ArrayList<Attribute>();
 	private List<Attribute> attribute_description       = new ArrayList<Attribute>();
@@ -268,6 +270,7 @@ public class XMLModel {
     	packages = new Element(tag_packages);
     		createPackagesImage();
     		createPackagesBootstrap();
+    		createRepoDefault();
     		
     }
 	
@@ -381,6 +384,7 @@ public class XMLModel {
     	content_image.add(users);
     	//content_image.add(packages);
     	content_image.addAll(listPackagesType);
+    	content_image.addAll(listRepo);
     	image.addContent(content_image);
     	
     	content_description.add(author);
@@ -479,6 +483,31 @@ public class XMLModel {
 		listPackagesType.add(elemTemp);
     }
     
+    private void createRepoDefault(){
+    	
+    	List<String> listPath = new ArrayList<String>();
+    	List<String> listTypeRepo = new ArrayList<String>();
+    	listPath.add("http://download.opensuse.org/distribution/12.3/repo/oss/");
+    	listPath.add("http://download.opensuse.org/update/12.3/");
+    	listTypeRepo.add("yast2");
+    	listTypeRepo.add("rpm-md");
+    	listRepo.add(new Element(tag_repository));
+    	listRepo.add(new Element(tag_repository));
+    	System.out.println("size listPath :"+listPath.size()+"\tsize listTypeRepo :"+listTypeRepo.size()+"\tsize listRepo :"+listRepo.size());
+    	for(int i = 0; i < listRepo.size(); i++){
+    		System.out.println("i :"+i+"\n");
+    		listRepo.get(i).setAttribute("type",listTypeRepo.get(i));
+    		listRepo.get(i).addContent(new Element(tag_source).setAttribute("path",listPath.get(i)));
+    	}
+    
+    }
+    /*    <repository type="yast2">
+    *    <source path="http://download.opensuse.org/distribution/12.3/repo/oss/"/>
+    *    </repository>
+    *    <repository type="rpm-md">
+    *    <source path="http://download.opensuse.org/update/12.3/"/>
+    *    </repository>
+    */
     private List<String> corePackages(){
  
 	    List<String> listTemp = new ArrayList<String>();

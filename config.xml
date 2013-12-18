@@ -48,4 +48,10 @@
     <package name="glibc-locale" />
     <package name="module-init-tools" />
   </packages>
+  <repository type="yast2">
+    <source path="http://download.opensuse.org/distribution/12.3/repo/oss/" />
+  </repository>
+  <repository type="rpm-md">
+    <source path="http://download.opensuse.org/update/12.3/" />
+  </repository>
 </image>
