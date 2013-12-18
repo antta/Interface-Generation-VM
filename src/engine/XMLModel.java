@@ -152,14 +152,9 @@ public class XMLModel {
     		private Element hwclock;
     	private Element users;
     		private Element user;
-    	private Element packages;
-    	private List<Element> listPackagesType = new ArrayList<Element>();
-<<<<<<< HEAD
-    		//private List<Element> listPackages = new ArrayList<Element>();
-=======
-    	    //private List<Element> listPackages = new ArrayList<Element>();
->>>>>>> branch 'master' of gitolite@forge.projetsdetudiants.net:axwaycontinuousdeployment/Interface-Generation-VM.git
-    	private List<Element> listRepo = new ArrayList<Element>();
+    	//private List<Element> listPackagesType = new ArrayList<Element>();
+    	
+    		private List<Element> listRepo = new ArrayList<Element>();
     	
     private String tag_image              	= "image";
     private String tag_description        	= "description";
@@ -183,7 +178,7 @@ public class XMLModel {
 	private String tag_users              	= "users";
 	private String tag_user               	= "user";
 	private String tag_packages				= "packages";
-	private String tag_myPackage			= "package";
+	//private String tag_myPackage			= "package";
 	private String tag_repository			= "repository";
 	private String tag_source				= "source";
 	
@@ -215,15 +210,8 @@ public class XMLModel {
 	private List<Content> content_type                  = new ArrayList<Content>();
 	private List<Content> content_machine               = new ArrayList<Content>();
 	private List<Content> content_users                 = new ArrayList<Content>();
-<<<<<<< HEAD
+
 	
-	
-=======
-
-
-
-
->>>>>>> branch 'master' of gitolite@forge.projetsdetudiants.net:axwaycontinuousdeployment/Interface-Generation-VM.git
 	public XMLModel(){
 		createTree();
 	}
@@ -272,7 +260,7 @@ public class XMLModel {
     		hwclock = new Element(tag_hwclock);
     	users = new Element(tag_users);
     		user = new Element(tag_user);
-    	packages = new Element(tag_packages);
+    	new Element(tag_packages);
     		//createPackagesImage();
     		//createPackagesBootstrap();
     		createXMLviaTemplate(1);
@@ -382,7 +370,7 @@ public class XMLModel {
     	content_image.add(description);
     	content_image.add(preferences);
     	content_image.add(users);
-    	content_image.addAll(listPackagesType);
+    	//content_image.addAll(listPackagesType);
     	content_image.addAll(listRepo);
     	image.addContent(content_image);
     	
@@ -474,12 +462,14 @@ public class XMLModel {
     	
     	Element temporaryElement = new Element(tag_packages);
     	temporaryElement.setAttributes(listAttribute);
+    	//listPackagesType.add(temporaryElement);
+    	image.addContent(temporaryElement);
+
     	for(String packageName : listPackage){
     		addPackage(packageName, typePackage);
     	}
-    	listPackagesType.add(temporaryElement);
     }
-	private void createPackagesImage(List<String> listPackage){
+	/*private void createPackagesImage(List<String> listPackage){
     	List<Attribute> listAttribute = new ArrayList<Attribute>();
     	
 		Element elemTemp = new Element(tag_packages);
@@ -491,7 +481,7 @@ public class XMLModel {
 			this.addPackage(nomPackages);
 		}
 		listPackagesType.add(elemTemp);
-    }
+    }*/
     
     /*private void createPackagesImage(){
     	
@@ -520,7 +510,7 @@ public class XMLModel {
 		
     }*/
     
-    private void createPackagesBootstrap(){
+    /*private void createPackagesBootstrap(){
     	
     	List<String> listPackage = new ArrayList<String>();
 
@@ -542,7 +532,7 @@ public class XMLModel {
 		elemTemp.setAttributes(listAttribute);
 		elemTemp.addContent(listContent);
 		listPackagesType.add(elemTemp);
-    }
+    }*/
     
     private void createRepoDefault(){
     	
@@ -586,7 +576,7 @@ public class XMLModel {
 		return listTemp;
     }
     
-	private List<String> kiwiPackages(){
+	/*private List<String> kiwiPackages(){
 
 	    List<String> listTemp = new ArrayList<String>();
 		listTemp.add("kiwi-desc-vmxboot");
@@ -610,7 +600,7 @@ public class XMLModel {
 		listTemp.add("kiwi-desc-isoboot");
 		listTemp.add("kiwi");
 		return listTemp;
-	}
+	}*/
 	
 	private List<String> bootstrapPackages(){
 		
@@ -679,9 +669,9 @@ public class XMLModel {
         List<Element> packagesList = this.image.getChildren("packages");
         for(Element e : packagesList){
             for(Attribute a : e.getAttributes()){
-                if(a.getName().equals("Type")) {
+                if(a.getName().equals("type")) {
                     if(a.getValue().equals(packageType)) {
-                        e.addContent(new Element(packageName));
+                        e.addContent(new Element(tag_packages).setAttribute("name",packageName));
                         return;
                     }
                 }

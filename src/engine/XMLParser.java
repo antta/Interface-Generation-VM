@@ -111,7 +111,7 @@ public class XMLParser {
 
     public static void main(String[] args){
         XMLParser parser = XMLParser.createEmptyConfig();
-        parser.xmlModel.addPackage("Patrick-Edouard");
+        //parser.xmlModel.addPackage("Patrick-Edouard");
         parser.save();
     }
 }
