@@ -154,7 +154,7 @@ public class XMLModel {
     		private Element user;
     	private Element packages;
     	private List<Element> listPackagesType = new ArrayList<Element>();
-    	private List<Element> listPackages = new ArrayList<Element>();
+    	    private List<Element> listPackages = new ArrayList<Element>();
     	private List<Element> listRepo = new ArrayList<Element>();
     	
     //private List<String> listPackage = new ArrayList<String>();
@@ -215,11 +215,11 @@ public class XMLModel {
 	private List<Content> content_type                  = new ArrayList<Content>();
 	private List<Content> content_machine               = new ArrayList<Content>();
 	private List<Content> content_users                 = new ArrayList<Content>();
-	private List<Content> content_packages				= new ArrayList<Content>();
-	
-	
+
+
+
+
 	public XMLModel(){
-		
 		createTree();
 	}
 	
@@ -438,7 +438,8 @@ public class XMLModel {
     	List<String> listPackage = new ArrayList<String>();
     	List<Attribute> listAttribute = new ArrayList<Attribute>();
     	List<Content> listContent = new ArrayList<Content>();
-    	
+
+        //ajoute les packets retournés par 'corePackages()' à la liste
     	listPackage.addAll(corePackages());
     	//this.kiwiPackages();
     	
@@ -624,9 +625,11 @@ public class XMLModel {
         List<Element> packagesList = this.image.getChildren("packages");
         for(Element e : packagesList){
             for(Attribute a : e.getAttributes()){
-                if(a.getName().equals(packageType)) {
-                    e.addContent(new Element(packageName));
-                    return;
+                if(a.getName().equals("Type")) {
+                    if(a.getValue().equals(packageType)) {
+                        e.addContent(new Element(packageName));
+                        return;
+                    }
                 }
             }
         }
