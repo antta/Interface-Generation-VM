@@ -580,7 +580,7 @@ public class XMLModel {
     }
 
     /**
-     * set
+     * setAuthorMail
      *
      * Fill the /image/description/author field with the given author
      *
@@ -588,6 +588,48 @@ public class XMLModel {
      */
     public void setAuthorMail(String mail){
         this.image.getChild(tag_description).getChild(tag_contact).setText(mail);
+    }
+
+    /**
+     * setSpecification
+     *
+     * Fill the /image/description/author field with the given author
+     *
+     * @param specification The mail to be set
+     */
+    public void setSpecification(String specification){
+        this.image.getChild(tag_description).getChild(tag_specification).setText(specification);
+    }
+
+    /**
+     * addPackage
+     *
+     * Add a package with default parameter. This is te easiest way to add a package.
+     *
+     * @param packageName the name of the package used on the repository
+     */
+    public void addPackage(String packageName){
+        this.addPackage(packageName, "image");
+    }
+
+    /**
+     * addPackage
+     *
+     * Add a package with the given packageType
+     *
+     * @param packageName the name of the package used on the repository
+     * @param packageType see http://doc.opensuse.org/projects/kiwi/doc/#sec.description.repository
+     */
+    public void addPackage(String packageName, String packageType){
+        List<Element> packagesList = this.image.getChildren("packages");
+        for(Element e : packagesList){
+            for(Attribute a : e.getAttributes()){
+                if(a.getName().equals(packageType)) {
+                    e.addContent(new Element(packageName));
+                    return;
+                }
+            }
+        }
     }
 
     public Element fileRepresentationRoot(){
