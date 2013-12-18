@@ -48,6 +48,7 @@
   <users group="root">
     <user name="root" pwd="$1$O18RH8FB$Hg7xawIuJlQzLfawBKb/H1" home="/root" shell="/bin/bash" />
   </users>
+  <users group="users" />
   <repository type="yast2">
     <source path="http://download.opensuse.org/distribution/12.3/repo/oss/" />
   </repository>

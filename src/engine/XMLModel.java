@@ -9,7 +9,7 @@ import org.jdom2.Element;
 
 /**
  * Created with IntelliJ IDEA.
- * User: patrick-edouard
+ * User: patrick-edouard & nicolas
  * Date: 12/2/13
  * Time: 5:43 PM
  * To change this template use File | Settings | File Templates.
@@ -18,112 +18,6 @@ import org.jdom2.Element;
  *
  * For instance, the following sample was made to generate de vm with
  * Jenkins pre-installed.
- *
- *    <image name="SuseAxway" displayname="SuseAxway" schemaversion="5.2">
- *    <description type="system">
- *    <author>M1-STIC-Beta</author>
- *    <contact>m1-isc-projet-beta@univ-savoie.fr</contact>
- *    <specification>
- *    Virtual machine with Jenkins and dependencies pre-installed
- *    </specification>
- *    </description>
- *    <preferences>
- *    <type checkprebuilt="true" boot="vmxboot/suse-12.3" fsnocheck="true" filesystem="ext3" bootloader="grub2" primary="true" format="vmdk" kernelcmdline="quiet" image="vmx">
- *    <machine memory="1024" arch="x86_64" guestOS="suse-64">
- *    <vmdisk controller="scsi" id="0"/>
- *    <vmdvd controller="ide" id="0"/>
- *    <vmnic driver="e1000" interface="0" mode="bridged"/>
- *    </machine>
- *    <size unit="M" additive="false">16384</size>
- *    </type>
- *    <version>1.0.0</version>
- *    <packagemanager>zypper</packagemanager>
- *    <rpm-check-signatures>false</rpm-check-signatures>
- *    <rpm-force>false</rpm-force>
- *    <boot-theme>studio</boot-theme>
- *    <timezone>UTC</timezone>
- *    <hwclock>localtime</hwclock>
- *    </preferences>
- *    <users group="root">
- *    <user name="root" pwd="$1$O18RH8FB$Hg7xawIuJlQzLfawBKb/H1" home="/root" shell="/bin/bash"/>
- *    </users>
- *    <packages type="image" patternType="onlyRequired">
- *    <package name="kiwi-desc-vmxboot"/>
- *    <package name="kiwi-desc-netboot-requires"/>
- *    <package name="kiwi-image-livecd-kde-snapshot"/>
- *    <package name="kiwi-image-livecd-x11-snapshot"/>
- *    <package name="kiwi-image-livecd-gnome-snapshot"/>
- *    <package name="kiwi-desc-vmxboot-requires"/>
- *    <package name="kiwi-desc-oemboot-requires"/>
- *    <package name="kiwi-instsource-plugins-openSUSE-12-1"/>
- *    <package name="kiwi-desc-isoboot-requires"/>
- *    <package name="kiwi-media-requires"/>
- *    <package name="kiwi-templates"/>
- *    <package name="kiwi-instsource"/>
- *    <package name="kiwi-doc"/>
- *    <package name="kiwi-tools"/>
- *    <package name="kiwi-desc-oemboot"/>
- *    <package name="kiwi-config-openSUSE"/>
- *    <package name="kiwi-desc-netboot"/>
- *    <package name="kiwi-pxeboot"/>
- *    <package name="kiwi-desc-isoboot"/>
- *    <package name="kiwi"/>
- *    <package name="xorg-x11-fonts"/>
- *    <package name="jenkins"/>
- *    <package name="grub"/>
- *    <package name="tar"/>
- *    <package name="kvm"/>
- *    <package name="aaa_base"/>
- *    <package name="branding-openSUSE"/>
- *    <package name="grub2"/>
- *    <package name="hwinfo"/>
- *    <package name="iputils"/>
- *    <package name="kernel-default"/>
- *    <package name="netcfg"/>
- *    <package name="openSUSE-build-key"/>
- *    <package name="openssh"/>
- *    <package name="plymouth"/>
- *    <package name="polkit-default-privs"/>
- *    <package name="rpcbind"/>
- *    <package name="syslog-ng"/>
- *    <package name="vim"/>
- *    <package name="zypper"/>
- *    <package name="open-vm-tools"/>
- *    </packages>
- *    <packages type="bootstrap">
- *    <package name="filesystem"/>
- *    <package name="glibc-locale"/>
- *    <package name="module-init-tools"/>
- *    </packages>
- *    <repository type="yast2">
- *    <source path="http://download.opensuse.org/distribution/12.3/repo/oss/"/>
- *    </repository>
- *    <repository type="rpm-md">
- *    <source path="http://download.opensuse.org/update/12.3/"/>
- *    </repository>
- *    <repository type="rpm-md">
- *    <source path="http://pkg.jenkins-ci.org/opensuse/"/>
- *    </repository>
- *    </image>
- *    
- *    JeOS : 
- *    <package name="aaa_base"/>
- *	  <package name="branding-openSUSE"/>
-		<package name="patterns-openSUSE-base"/>
-		<package name="grub2"/>
-	<package name="hwinfo"/>
-	<package name="iputils"/>
-	<package name="kernel-default"/>
-	<package name="netcfg"/>
-	<package name="openSUSE-build-key"/>
-	<package name="openssh"/>
-	<package name="plymouth"/>
-	<package name="polkit-default-privs"/>
-	<package name="rpcbind"/>
-	<package name="syslog-ng"/>
-	<package name="vim"/>
-	<package name="zypper"/>
-	<package name="timezone"/>
  *
  *  @see 'http://doc.opensuse.org/projects/kiwi/schema-doc/'
  *  @see 'http://doc.opensuse.org/projects/kiwi/doc/#sec.description.config.xml'
@@ -150,8 +44,9 @@ public class XMLModel {
     		private Element boottheme;
     		private Element timezone;
     		private Element hwclock;
-    	private Element users;
+    	private Element users_root;
     		private Element user;
+		private Element users_users;
     	//private List<Element> listPackagesType = new ArrayList<Element>();
     	
     		private List<Element> listRepo = new ArrayList<Element>();
@@ -201,7 +96,8 @@ public class XMLModel {
 	private List<Attribute> attribute_boottheme         = new ArrayList<Attribute>();
 	private List<Attribute> attribute_timezone          = new ArrayList<Attribute>();
 	private List<Attribute> attribute_hwclock           = new ArrayList<Attribute>();
-	private List<Attribute> attribute_users             = new ArrayList<Attribute>();
+	private List<Attribute> attribute_users_root        = new ArrayList<Attribute>();
+	private List<Attribute> attribute_users_users		= new ArrayList<Attribute>();
 	private List<Attribute> attribute_user              = new ArrayList<Attribute>();
 	
 	private List<Content> content_image                 = new ArrayList<Content>();
@@ -258,8 +154,9 @@ public class XMLModel {
     		boottheme = new Element(tag_boottheme);
     		timezone = new Element(tag_timezone);
     		hwclock = new Element(tag_hwclock);
-    	users = new Element(tag_users);
+    	users_root = new Element(tag_users);
     		user = new Element(tag_user);
+    	users_users = new Element(tag_users);
     	new Element(tag_packages);
     		//createPackagesImage();
     		//createPackagesBootstrap();
@@ -349,8 +246,12 @@ public class XMLModel {
         //attribute_hwclock.add(new Attribute(null, null));
     	hwclock.setAttributes(attribute_hwclock);
 
-    	attribute_users.add(new Attribute("group", "root"));
-    	users.setAttributes(attribute_users);
+    	attribute_users_root.add(new Attribute("group", "root"));
+    	users_root.setAttributes(attribute_users_root);
+    	
+    	attribute_users_users.add(new Attribute("group","users"));
+    	users_users.setAttributes(attribute_users_users);
+    	
     	
     	attribute_user.add(new Attribute("name","root"));
     	attribute_user.add(new Attribute("pwd","$1$O18RH8FB$Hg7xawIuJlQzLfawBKb/H1"));
@@ -369,7 +270,8 @@ public class XMLModel {
 		
     	content_image.add(description);
     	content_image.add(preferences);
-    	content_image.add(users);
+    	content_image.add(users_root);
+    	content_image.add(users_users);
     	//content_image.addAll(listPackagesType);
     	content_image.addAll(listRepo);
     	image.addContent(content_image);
@@ -413,7 +315,7 @@ public class XMLModel {
         hwclock.addContent("localtime");
         
         content_users.add(user);
-        users.addContent(content_users);
+        users_root.addContent(content_users);
         
         //packages.addContent(content_packages);
         	
@@ -422,12 +324,12 @@ public class XMLModel {
     private void createXMLviaTemplate(int choice){
     	
     	switch(choice){
-    	case 1 : createPackageTemplateJeOS();break;
-    	case 2 : createPackageTemplateGnome();break;
+    	case 1 : createPackageTemplate(jeOSPackages());break;
+    	case 2 : createPackageTemplate(gnomePackages());break;
     	default : throw new IllegalArgumentException();
     	}
     }
-    private void createPackageTemplateJeOS(){
+    private void createPackageTemplate(List<String> listPackage){
     	
     	List<String> listTypePackage = new ArrayList<String>();
     	listTypePackage.add("image");
@@ -445,17 +347,13 @@ public class XMLModel {
 		listAttributePackage.add(listAttributeBootstrap);
 		// liste de liste de package
 		List<List<String>> listListPackage = new ArrayList<List<String>>();
-		listListPackage.add(jeOSPackages());
+		listListPackage.add(listPackage);
 		listListPackage.add(bootstrapPackages());
 		
 		for(int i = 0; i < listTypePackage.size(); ++i){
 			
 			createPackages(listTypePackage.get(i), listAttributePackage.get(i), listListPackage.get(i));
 		}
-    }
-    
-    private void createPackageTemplateGnome(){
-    	
     }
     
     private void createPackages (String typePackage, List<Attribute> listAttribute, List<String> listPackage){
@@ -469,70 +367,6 @@ public class XMLModel {
     		addPackage(packageName, typePackage);
     	}
     }
-	/*private void createPackagesImage(List<String> listPackage){
-    	List<Attribute> listAttribute = new ArrayList<Attribute>();
-    	
-		Element elemTemp = new Element(tag_packages);
-		listAttribute.add(new Attribute("type","image"));
-		listAttribute.add(new Attribute("patternType","onlyRequired"));
-		elemTemp.setAttributes(listAttribute);
-		for(String nomPackages : listPackage){
-			System.out.println(nomPackages+"\n");
-			this.addPackage(nomPackages);
-		}
-		listPackagesType.add(elemTemp);
-    }*/
-    
-    /*private void createPackagesImage(){
-    	
-    	List<String> listPackage = new ArrayList<String>();
-    	List<Attribute> listAttribute = new ArrayList<Attribute>();
-    	List<Content> listContent = new ArrayList<Content>();
-
-        //ajoute les packets retournés par 'corePackages()' à la liste
-    	listPackage.addAll(corePackages());
-    	//this.kiwiPackages();
-    	
-    	
-		for (String attributPackage : listPackage){
-			Element packageTemp = new Element(tag_myPackage); 
-			packageTemp.setAttribute(new Attribute("name", attributPackage));
-			listPackages.add(packageTemp);
-			listContent.add(packageTemp);
-		}
-		
-		Element elemTemp = new Element(tag_packages);
-		listAttribute.add(new Attribute("type","image"));
-		listAttribute.add(new Attribute("patternType","onlyRequired"));
-		elemTemp.setAttributes(listAttribute);
-		elemTemp.addContent(listContent);
-		listPackagesType.add(elemTemp);
-		
-    }*/
-    
-    /*private void createPackagesBootstrap(){
-    	
-    	List<String> listPackage = new ArrayList<String>();
-
-    	List<Attribute> listAttribute = new ArrayList<Attribute>();
-    	List<Content> listContent = new ArrayList<Content>();
-    		
-    	listPackage.addAll(bootstrapPackages());
-
-    	
-		for (String attributPackage : listPackage){
-			Element packageTemp = new Element(tag_myPackage); 
-			packageTemp.setAttribute(new Attribute("name", attributPackage));
-			//listPackages.add(packageTemp);
-			listContent.add(packageTemp);
-		}
-		
-		Element elemTemp = new Element(tag_packages);
-		listAttribute.add(new Attribute("type","bootstrap"));
-		elemTemp.setAttributes(listAttribute);
-		elemTemp.addContent(listContent);
-		listPackagesType.add(elemTemp);
-    }*/
     
     private void createRepoDefault(){
     	
@@ -544,9 +378,9 @@ public class XMLModel {
     	listTypeRepo.add("rpm-md");
     	listRepo.add(new Element(tag_repository));
     	listRepo.add(new Element(tag_repository));
-    	System.out.println("size listPath :"+listPath.size()+"\tsize listTypeRepo :"+listTypeRepo.size()+"\tsize listRepo :"+listRepo.size());
+    	//System.out.println("size listPath :"+listPath.size()+"\tsize listTypeRepo :"+listTypeRepo.size()+"\tsize listRepo :"+listRepo.size());
     	for(int i = 0; i < listRepo.size(); i++){
-    		System.out.println("i :"+i+"\n");
+    		//System.out.println("i :"+i+"\n");
     		listRepo.get(i).setAttribute("type",listTypeRepo.get(i));
     		listRepo.get(i).addContent(new Element(tag_source).setAttribute("path",listPath.get(i)));
     	}
@@ -574,6 +408,45 @@ public class XMLModel {
 		listTemp.add("zypper");
 		listTemp.add("timezone");
 		return listTemp;
+    }
+    
+    private List<String> gnomePackages(){
+    	
+	    List<String> listTemp = new ArrayList<String>();
+        listTemp.add("gnome-terminal");
+        listTemp.add("gtk2-branding-openSUSE");
+        listTemp.add("gtk3-branding-openSUSE");
+        listTemp.add("gvfs-backends");
+        listTemp.add("libgnomesu");
+        listTemp.add("sax2-tools");
+        listTemp.add("tomboy");
+        listTemp.add("yast2-control-center-gnome");
+        listTemp.add("SuSEfirewall2");
+        listTemp.add("grub2");
+        listTemp.add("glibc-locale");
+        listTemp.add("iputils");
+        listTemp.add("kernel-default");
+        listTemp.add("less");
+        listTemp.add("plymouth");
+        listTemp.add("syslog-ng");
+        listTemp.add("vim");
+        listTemp.add("yast2");
+        listTemp.add("yast2-firstboot");
+        listTemp.add("zypper");
+        listTemp.add("dbus-1-x11");
+        listTemp.add("icewm");
+        listTemp.add("x11-tools");
+        listTemp.add("xf86-video-modesetting");
+        listTemp.add("xorg-x11");
+        listTemp.add("xorg-x11-driver-input");
+        listTemp.add("xorg-x11-driver-video");
+        listTemp.add("xorg-x11-fonts");
+        listTemp.add("xorg-x11-server");
+        listTemp.add("yast2-branding-openSUSE");
+        listTemp.add("yast2-theme-openSUSE");
+        listTemp.add("yast2-x11");
+		return listTemp;
+
     }
     
 	/*private List<String> kiwiPackages(){
@@ -612,7 +485,6 @@ public class XMLModel {
 	}
 	
 	
-
     /**
      * setAuthor
      *
