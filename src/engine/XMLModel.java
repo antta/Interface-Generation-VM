@@ -154,11 +154,9 @@ public class XMLModel {
     		private Element user;
     	private Element packages;
     	private List<Element> listPackagesType = new ArrayList<Element>();
-    	private List<Element> listPackages = new ArrayList<Element>();
+    		//private List<Element> listPackages = new ArrayList<Element>();
     	private List<Element> listRepo = new ArrayList<Element>();
     	
-    //private List<String> listPackage = new ArrayList<String>();
-
     private String tag_image              	= "image";
     private String tag_description        	= "description";
     private String tag_author             	= "author";
@@ -206,8 +204,6 @@ public class XMLModel {
 	private List<Attribute> attribute_hwclock           = new ArrayList<Attribute>();
 	private List<Attribute> attribute_users             = new ArrayList<Attribute>();
 	private List<Attribute> attribute_user              = new ArrayList<Attribute>();
-	private List<Attribute> attribute_packages			= new ArrayList<Attribute>();
-	//private List<Attribute> attribute_myPackage			= new ArrayList<Attribute>();
 	
 	private List<Content> content_image                 = new ArrayList<Content>();
 	private List<Content> content_description           = new ArrayList<Content>();
@@ -215,7 +211,6 @@ public class XMLModel {
 	private List<Content> content_type                  = new ArrayList<Content>();
 	private List<Content> content_machine               = new ArrayList<Content>();
 	private List<Content> content_users                 = new ArrayList<Content>();
-	private List<Content> content_packages				= new ArrayList<Content>();
 	
 	
 	public XMLModel(){
@@ -268,8 +263,9 @@ public class XMLModel {
     	users = new Element(tag_users);
     		user = new Element(tag_user);
     	packages = new Element(tag_packages);
-    		createPackagesImage();
-    		createPackagesBootstrap();
+    		//createPackagesImage();
+    		//createPackagesBootstrap();
+    		createXMLviaTemplate(1);
     		createRepoDefault();
     		
     }
@@ -364,12 +360,6 @@ public class XMLModel {
     	attribute_user.add(new Attribute("shell","/bin/bash"));
     	user.setAttributes(attribute_user);
     	
-    	//attribute_packages.add(new Attribute("type", "image"));
-    	//attribute_packages.add(new Attribute("patternType", "onlyRequired"));
-    	//packages.setAttributes(attribute_packages);
-    	
-    	
-    	
     }
     
     /**
@@ -382,7 +372,6 @@ public class XMLModel {
     	content_image.add(description);
     	content_image.add(preferences);
     	content_image.add(users);
-    	//content_image.add(packages);
     	content_image.addAll(listPackagesType);
     	content_image.addAll(listRepo);
     	image.addContent(content_image);
@@ -432,8 +421,69 @@ public class XMLModel {
         	
 	}
     
+    private void createXMLviaTemplate(int choice){
+    	
+    	switch(choice){
+    	case 1 : createPackageTemplateJeOS();break;
+    	case 2 : createPackageTemplateGnome();break;
+    	default : throw new IllegalArgumentException();
+    	}
+    }
+    private void createPackageTemplateJeOS(){
+    	
+    	List<String> listTypePackage = new ArrayList<String>();
+    	listTypePackage.add("image");
+    	listTypePackage.add("bootstrap");
+    	// liste des attributs de la balise <package type=image>
+    	List<Attribute> listAttributeImage = new ArrayList<Attribute>();
+		listAttributeImage.add(new Attribute("type","image"));
+		listAttributeImage.add(new Attribute("patternType","onlyRequired"));
+		// liste des attributs de la balise <package type="bootstrap");
+		List<Attribute> listAttributeBootstrap = new ArrayList<Attribute>();
+		listAttributeBootstrap.add(new Attribute("type","bootstrap"));
+		// liste de liste d'attribut
+		List<List<Attribute>> listAttributePackage = new ArrayList<List<Attribute>>();
+		listAttributePackage.add(listAttributeImage);
+		listAttributePackage.add(listAttributeBootstrap);
+		// liste de liste de package
+		List<List<String>> listListPackage = new ArrayList<List<String>>();
+		listListPackage.add(jeOSPackages());
+		listListPackage.add(bootstrapPackages());
+		
+		for(int i = 0; i < listTypePackage.size(); ++i){
+			
+			createPackages(listTypePackage.get(i), listAttributePackage.get(i), listListPackage.get(i));
+		}
+    }
     
-    private void createPackagesImage(){
+    private void createPackageTemplateGnome(){
+    	
+    }
+    
+    private void createPackages (String typePackage, List<Attribute> listAttribute, List<String> listPackage){
+    	
+    	Element temporaryElement = new Element(tag_packages);
+    	temporaryElement.setAttributes(listAttribute);
+    	for(String packageName : listPackage){
+    		addPackage(packageName, typePackage);
+    	}
+    	listPackagesType.add(temporaryElement);
+    }
+	private void createPackagesImage(List<String> listPackage){
+    	List<Attribute> listAttribute = new ArrayList<Attribute>();
+    	
+		Element elemTemp = new Element(tag_packages);
+		listAttribute.add(new Attribute("type","image"));
+		listAttribute.add(new Attribute("patternType","onlyRequired"));
+		elemTemp.setAttributes(listAttribute);
+		for(String nomPackages : listPackage){
+			System.out.println(nomPackages+"\n");
+			this.addPackage(nomPackages);
+		}
+		listPackagesType.add(elemTemp);
+    }
+    
+    /*private void createPackagesImage(){
     	
     	List<String> listPackage = new ArrayList<String>();
     	List<Attribute> listAttribute = new ArrayList<Attribute>();
@@ -457,7 +507,7 @@ public class XMLModel {
 		elemTemp.addContent(listContent);
 		listPackagesType.add(elemTemp);
 		
-    }
+    }*/
     
     private void createPackagesBootstrap(){
     	
@@ -472,7 +522,7 @@ public class XMLModel {
 		for (String attributPackage : listPackage){
 			Element packageTemp = new Element(tag_myPackage); 
 			packageTemp.setAttribute(new Attribute("name", attributPackage));
-			listPackages.add(packageTemp);
+			//listPackages.add(packageTemp);
 			listContent.add(packageTemp);
 		}
 		
@@ -501,14 +551,8 @@ public class XMLModel {
     	}
     
     }
-    /*    <repository type="yast2">
-    *    <source path="http://download.opensuse.org/distribution/12.3/repo/oss/"/>
-    *    </repository>
-    *    <repository type="rpm-md">
-    *    <source path="http://download.opensuse.org/update/12.3/"/>
-    *    </repository>
-    */
-    private List<String> corePackages(){
+
+    private List<String> jeOSPackages(){
  
 	    List<String> listTemp = new ArrayList<String>();
     	listTemp.add("aaa_base");
