@@ -46,8 +46,7 @@ public class XMLModel {
     		private Element timezone;
     		private Element hwclock;
     	private Element users_root;
-    		private Element user;
-		private Element users_users;
+    		private Element user_root;
     	//private List<Element> listPackagesType = new ArrayList<Element>();
     	
     		private List<Element> listRepo = new ArrayList<Element>();
@@ -57,7 +56,7 @@ public class XMLModel {
     private String tag_author             	= "author";
     private String tag_contact            	= "contact";
     private String tag_specification      	= "specification";
-    private String tag_preferences        	= "preference";
+    private String tag_preferences        	= "preferences";
 	private String tag_type               	= "type";
 	private String tag_machine            	= "machine";
 	private String tag_vmdisk             	= "vmdisk";
@@ -66,7 +65,7 @@ public class XMLModel {
 	private String tag_size               	= "size";
 	private String tag_version            	= "version";
 	private String tag_packagemanager     	= "packagemanager";
-	private String tag_rpmchecksignatures 	= "rpm-check-manager";
+	private String tag_rpmchecksignatures 	= "rpm-check-signatures";
 	private String tag_rpmforce           	= "rpm-force";
 	private String tag_boottheme          	= "boot-theme";
 	private String tag_timezone           	= "timezone";
@@ -74,7 +73,7 @@ public class XMLModel {
 	private String tag_users              	= "users";
 	private String tag_user               	= "user";
 	private String tag_packages				= "packages";
-	//private String tag_myPackage			= "package";
+	private String tag_package				= "package";
 	private String tag_repository			= "repository";
 	private String tag_source				= "source";
 	
@@ -98,7 +97,6 @@ public class XMLModel {
 	private List<Attribute> attribute_timezone          = new ArrayList<Attribute>();
 	private List<Attribute> attribute_hwclock           = new ArrayList<Attribute>();
 	private List<Attribute> attribute_users_root        = new ArrayList<Attribute>();
-	private List<Attribute> attribute_users_users		= new ArrayList<Attribute>();
 	private List<Attribute> attribute_user              = new ArrayList<Attribute>();
 	
 	private List<Content> content_image                 = new ArrayList<Content>();
@@ -156,8 +154,7 @@ public class XMLModel {
     		timezone = new Element(tag_timezone);
     		hwclock = new Element(tag_hwclock);
     	users_root = new Element(tag_users);
-    		user = new Element(tag_user);
-    	users_users = new Element(tag_users);
+    		user_root = new Element(tag_user);
     	new Element(tag_packages);
     		//createPackagesImage();
     		//createPackagesBootstrap();
@@ -248,17 +245,13 @@ public class XMLModel {
     	hwclock.setAttributes(attribute_hwclock);
 
     	attribute_users_root.add(new Attribute("group", "root"));
-    	users_root.setAttributes(attribute_users_root);
-    	
-    	attribute_users_users.add(new Attribute("group","users"));
-    	users_users.setAttributes(attribute_users_users);
-    	
+    	users_root.setAttributes(attribute_users_root);  	
     	
     	attribute_user.add(new Attribute("name","root"));
     	attribute_user.add(new Attribute("pwd","$1$O18RH8FB$Hg7xawIuJlQzLfawBKb/H1"));
     	attribute_user.add(new Attribute("home","/root"));
     	attribute_user.add(new Attribute("shell","/bin/bash"));
-    	user.setAttributes(attribute_user);
+    	user_root.setAttributes(attribute_user);
     	
     }
     
@@ -272,7 +265,6 @@ public class XMLModel {
     	content_image.add(description);
     	content_image.add(preferences);
     	content_image.add(users_root);
-    	content_image.add(users_users);
     	//content_image.addAll(listPackagesType);
     	content_image.addAll(listRepo);
     	image.addContent(content_image);
@@ -315,7 +307,7 @@ public class XMLModel {
         timezone.addContent("UTC");
         hwclock.addContent("localtime");
         
-        content_users.add(user);
+        content_users.add(user_root);
         users_root.addContent(content_users);
         
         //packages.addContent(content_packages);
@@ -544,7 +536,7 @@ public class XMLModel {
             for(Attribute a : e.getAttributes()){
                 if(a.getName().equals("type")) {
                     if(a.getValue().equals(packageType)) {
-                        e.addContent(new Element(this.tag_packages).setAttribute("name",packageName));
+                        e.addContent(new Element(this.tag_package).setAttribute("name",packageName));
                         return;
                     }
                 }
