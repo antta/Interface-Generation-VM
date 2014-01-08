@@ -556,6 +556,7 @@ public class XMLModel {
     public void addUser(String packageName, String groupType, Collection<Attribute> userAttributes){
         List<Element> packagesList = this.image.getChildren("users");
         for(Element e : packagesList){
+            // search if the user group does exist
             for(Attribute a : e.getAttributes()){
                 if(a.getName().equals("group")) {
                     if(a.getValue().equals(groupType)) {
@@ -564,6 +565,8 @@ public class XMLModel {
                     }
                 }
             }
+            // if user group doesn't exist we need to create it
+            e.addContent(new Element(groupType).addContent(new Element(this.tag_user).setAttributes(userAttributes)));
         }
     }
 
