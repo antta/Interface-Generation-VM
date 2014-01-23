@@ -1,4 +1,4 @@
-package engine;
+package fr.univsavoie.serveurbeta.generationvm.engine;
 
 import org.jdom2.Attribute;
 import org.jdom2.Element;

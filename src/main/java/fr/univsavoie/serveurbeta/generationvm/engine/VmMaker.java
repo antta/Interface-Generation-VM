@@ -1,4 +1,4 @@
-package engine;
+package fr.univsavoie.serveurbeta.generationvm.engine;
 
 public class VmMaker {
 	/**
