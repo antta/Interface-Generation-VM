@@ -1,4 +1,4 @@
-package fr.univsavoie.serveurbeta.generationvm.engine;
+package  main.java.fr.univsavoie.serveurbeta.generationvm.engine;
 
 import java.util.ArrayList;
 import java.util.Collection;
