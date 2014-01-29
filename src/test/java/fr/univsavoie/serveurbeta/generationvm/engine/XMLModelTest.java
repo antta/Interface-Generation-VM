@@ -1,5 +1,8 @@
 package fr.univsavoie.serveurbeta.generationvm.engine;
 
+import static org.junit.Assert.assertEquals;
+
+import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.junit.Test;
 
@@ -19,20 +22,10 @@ public class XMLModelTest {
 		
 		model.setAuthor(testAuthor);
 		
-		if(root.getChild("description").getChild("author").equals(testAuthor)){
-			assert true;
-		}
-		else {
-			assert false;
-		}
+		assertEquals(testAuthor, root.getChild("description").getChild("author").getText());
 		
-		if(root.getChild("description").getChild("author").equals("BadAuthor")){
-			assert false;
-		}
-		else {
-			assert true;
-		}
-		
+		assertEquals(false, root.getChild("description").getChild("author").equals("BadAuthor"));
+	
 	}
 	
 	@Test
@@ -42,19 +35,10 @@ public class XMLModelTest {
 		
 		model.setAuthorMail(testAuthorMail);
 		
-		if(root.getChild("description").getChild("contact").equals(testAuthorMail)){
-			assert true;
-		}
-		else {
-			assert false;
-		}
+		assertEquals(testAuthorMail, root.getChild("description").getChild("contact").getText());
 		
-		if(root.getChild("description").getChild("contact").equals("BadAuthorMail")){
-			assert false;
-		}
-		else {
-			assert true;
-		}
+		assertEquals(false, root.getChild("description").getChild("contact").equals("BadAuthorMail"));
+		
 	}
 	
 	@Test
@@ -78,5 +62,24 @@ public class XMLModelTest {
 		}
 		
 	}
-
+	
+	@Test
+	public void testAddPackage(){
+		String testPackageName = "jenkins";
+		String testPackageType = "image";
+		
+		model.addPackage(testPackageName);
+		
+		assertEquals(testPackageType, root.getChild("packages").getAttribute("type").getValue());
+		for(Element elt : root.getChildren()){
+			for(Attribute a : elt.getAttributes()){
+				if(a.getName().equals("type")){
+					assertEquals(testPackageType, a.getValue());
+				}
+			}
+			
+			root.getChild("packages").getChild("package").getValue();
+		}
+		assertEquals(testPackageName, root.getChild("packages").getChild("package").getValue());
+	}
 }
