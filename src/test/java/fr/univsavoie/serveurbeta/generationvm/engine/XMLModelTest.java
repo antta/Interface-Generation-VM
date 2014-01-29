@@ -47,20 +47,10 @@ public class XMLModelTest {
 		
 		model.setSpecification(testSpecification);
 		
-		if(root.getChild("description").getChild("specification").equals(testSpecification)){
-			assert true;
-		}
-		else {
-			assert false;
-		}
+		assertEquals(testSpecification, root.getChild("description").getChild("specification").getText());
 		
-		if(root.getChild("description").getChild("specification").equals("BadSpecification")){
-			assert true;
-		}
-		else {
-			assert false;
-		}
-		
+		assertEquals(false, root.getChild("description").getChild("specification").equals("BadSpecification"));
+				
 	}
 	
 	@Test
@@ -70,16 +60,17 @@ public class XMLModelTest {
 		
 		model.addPackage(testPackageName);
 		
-		assertEquals(testPackageType, root.getChild("packages").getAttribute("type").getValue());
 		for(Element elt : root.getChildren()){
 			for(Attribute a : elt.getAttributes()){
 				if(a.getName().equals("type")){
-					assertEquals(testPackageType, a.getValue());
+					if(a.getValue().equals(testPackageType)){
+						for(Element e : root.getChild("packages").getChild("package").getChildren()){
+							assertEquals(testPackageName, e.getName());
+						}
+					}
 				}
 			}
 			
-			root.getChild("packages").getChild("package").getValue();
 		}
-		assertEquals(testPackageName, root.getChild("packages").getChild("package").getValue());
 	}
 }
