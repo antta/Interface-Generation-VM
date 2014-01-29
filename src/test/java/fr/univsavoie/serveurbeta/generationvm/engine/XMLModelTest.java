@@ -2,6 +2,8 @@ package fr.univsavoie.serveurbeta.generationvm.engine;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collection;
+
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.junit.Test;
@@ -74,4 +76,13 @@ public class XMLModelTest {
 		}
 		assertEquals(match, true);
 	}
+/*
+	public void testAddUser(){
+		String testPackageName = "jenkins";
+		String testGroupType = "perso";
+		Collection<Attribute> testUserAttributes = new Collection<Attribute>();
+		
+		model.addUser(testPackageName, testGroupType, testUserAttributes);
+	}
+*/
 }
