@@ -1,6 +1,6 @@
-package fr.univsavoie.serveurbeta.generationvm.view.prototype;
+package main.java.fr.univsavoie.serveurbeta.generationvm.view.prototype;
 
-import fr.univsavoie.serveurbeta.generationvm.engine.XMLParser;
+import main.java.fr.univsavoie.serveurbeta.generationvm.engine.XMLParser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -142,7 +142,7 @@ public class MainFrame extends JFrame implements ActionListener{
 
 	public static void main (String[] args){
 
-		MainFrame maFen = new MainFrame();
+		new MainFrame();
 	}
 
 }

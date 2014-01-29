@@ -1,4 +1,4 @@
-package fr.univsavoie.serveurbeta.generationvm.engine;
+package  main.java.fr.univsavoie.serveurbeta.generationvm.engine;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +26,7 @@ import org.jdom2.Element;
 
 public class XMLModel {
 	
-    private Element image;
+	private Element image;
         private Element description;
         	private Element author;
         	private Element contact;
@@ -106,11 +106,27 @@ public class XMLModel {
 	private List<Content> content_machine               = new ArrayList<Content>();
 	private List<Content> content_users                 = new ArrayList<Content>();
 
+	private int templateNumber = 1;
 	
 	public XMLModel(){
 		createTree();
 	}
 	
+	public XMLModel(int choice){
+		
+		createTree();
+		this.setTemplateNumber(choice);
+		
+	}
+	
+	public int getTemplateNumber() {
+		return templateNumber;
+	}
+
+	public void setTemplateNumber(int templateNumber) {
+		this.templateNumber = templateNumber;
+	}
+
 	/**
 	 * function who regroup all creating function
 	 * it use those function : 
@@ -158,7 +174,7 @@ public class XMLModel {
     	new Element(tag_packages);
     		//createPackagesImage();
     		//createPackagesBootstrap();
-    		createXMLviaTemplate(1);
+    		createXMLviaTemplate(this.getTemplateNumber());
     		createRepoDefault();
     		
     }
