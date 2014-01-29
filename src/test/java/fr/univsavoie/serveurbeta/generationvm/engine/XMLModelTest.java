@@ -56,21 +56,22 @@ public class XMLModelTest {
 	@Test
 	public void testAddPackage(){
 		String testPackageName = "jenkins";
-		String testPackageType = "image";
+		String defaultPackageType = "image";
+		boolean match = false;
 		
 		model.addPackage(testPackageName);
 		
-		for(Element elt : root.getChildren()){
+		for(Element elt : root.getChildren("packages")){
 			for(Attribute a : elt.getAttributes()){
-				if(a.getName().equals("type")){
-					if(a.getValue().equals(testPackageType)){
-						for(Element e : root.getChild("packages").getChild("package").getChildren()){
-							assertEquals(testPackageName, e.getName());
+				if(a.getValue().equals(defaultPackageType)){
+					for(Element e : elt.getChildren("package")){
+						if(e.getAttribute("name").getValue().equals(testPackageName)){
+							match = true;
 						}
 					}
 				}
 			}
-			
 		}
+		assertEquals(match, true);
 	}
 }
