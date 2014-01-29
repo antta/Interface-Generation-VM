@@ -37,6 +37,10 @@ public class XMLParser {
         //this.open();
         this.xmlModel = new XMLModel();
 	}
+	
+	private XMLParser(int template) {
+		this.xmlModel = new XMLModel(template);
+	}
 
     /**
      * createEmptyConfig
@@ -48,6 +52,10 @@ public class XMLParser {
      */
     public static XMLParser createEmptyConfig(){
         return new XMLParser();
+    }
+    
+    public static XMLParser createEmptyConfig(int template){
+    	return new XMLParser(template);
     }
 
     /**
