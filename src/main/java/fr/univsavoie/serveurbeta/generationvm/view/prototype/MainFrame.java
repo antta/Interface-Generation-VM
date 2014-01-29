@@ -124,7 +124,6 @@ public class MainFrame extends JFrame implements ActionListener{
         this.xmlParser = XMLParser.createEmptyConfig();
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == annuler)

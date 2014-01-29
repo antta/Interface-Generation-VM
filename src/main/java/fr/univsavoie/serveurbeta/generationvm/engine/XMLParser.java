@@ -26,7 +26,7 @@ public class XMLParser {
 
     private static String xmlPath = "config.xml";
     public XMLModel xmlModel;
-    private Element root;
+    public Element root;
 
     /**
      * XMLParser

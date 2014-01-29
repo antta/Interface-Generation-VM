@@ -514,7 +514,7 @@ public class XMLModel {
     /**
      * addPackage
      *
-     * Add a package with default parameter. This is te easiest way to add a package.
+     * Add a package with default parameter. This is the easiest way to add a package.
      *
      * @param packageName the name of the package used on the repository
      */
