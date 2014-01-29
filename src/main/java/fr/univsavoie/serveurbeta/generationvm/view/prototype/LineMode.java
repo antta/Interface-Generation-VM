@@ -44,6 +44,7 @@ public class LineMode {
 				"\n-t   --template   jeos | gnome       : Create a new configuration with predefined package. (jeos | gnome | (maybe others) )" +
 				"\n ==      package  managing        ==" +
 				"\n--addpackage packageName [packageType] : Add the package to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
+				"\n--addpackages listPackages             : Add all the packages to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
 				"\n--addrepository repositoryName         : Add the package to the configuration. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
 				"\n ==        vm    managing         ==" +
 				"\n--setAuthor author                     : Set the author name" +
@@ -56,19 +57,40 @@ public class LineMode {
 		String command = this.input.nextLine();
 		treatCommand(command);
 	}
+	
+	private void addPackages(String command){
+		//System.out.println("command "+command);
+		String[] listPackages = (command.substring("--addpackages ".length())).split(" ");
+		for (String packages : listPackages){
+			//System.out.println("packages "+packages);
+			this.addPackage("--addpackage "+packages);
+		}
+	}
+	
+	private void addPackage(String command){
+		String packageName = command.substring("--addpackage ".length());
+		if(packageName.split(" ").length>1){
+			this.parser.xmlModel.addPackage(packageName.split(" ")[0],packageName.split(" ")[1]);
+		}else{
+			this.parser.xmlModel.addPackage(command.substring("--addpackage ".length()));
+		}
+	}
 
 	public void treatCommand(String command){
 		//String command = this.input.nextLine();
 		if(command.startsWith("exit")){
 			this.parser.save();
 			System.exit(0);
+		}else if(command.startsWith("--addpackages")){
+			this.addPackages(command);
 		}else if(command.startsWith("--addpackage")){
-			String packageName = command.substring("--addpackage ".length());
-			if(packageName.split(" ").length>1){
-				this.parser.xmlModel.addPackage(packageName.split(" ")[0],packageName.split(" ")[1]);
-			}else{
-				this.parser.xmlModel.addPackage(command.substring("--addpackage ".length()));
-			}
+			//String packageName = command.substring("--addpackage ".length());
+			//if(packageName.split(" ").length>1){
+				//this.parser.xmlModel.addPackage(packageName.split(" ")[0],packageName.split(" ")[1]);
+			//}else{
+				//this.parser.xmlModel.addPackage(command.substring("--addpackage ".length()));
+			//}
+			this.addPackage(command);
 		}else if(command.startsWith("--addrepository")){
 			System.out.println("Not implemented yet");
 		}else if(command.startsWith("--setAuthor")){
