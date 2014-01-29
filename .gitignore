@@ -72,4 +72,11 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+# Maven
+target/
+
+# Others
+pom.xml~
+.gitignore~
+
 /config.xml
