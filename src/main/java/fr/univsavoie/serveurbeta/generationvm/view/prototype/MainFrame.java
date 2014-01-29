@@ -1,6 +1,6 @@
-package main.java.fr.univsavoie.serveurbeta.generationvm.view.prototype;
+package fr.univsavoie.serveurbeta.generationvm.view.prototype;
 
-import main.java.fr.univsavoie.serveurbeta.generationvm.engine.XMLParser;
+import fr.univsavoie.serveurbeta.generationvm.engine.XMLParser;
 
 import javax.swing.*;
 import java.awt.*;
