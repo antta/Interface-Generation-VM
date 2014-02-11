@@ -53,7 +53,7 @@ public class LineMode {
 				"\n");
 	}
 
-	public void getCommand() {
+	public final void getCommand() {
 		String command = this.input.nextLine();
 		treatCommand(command);
 	}
@@ -74,7 +74,7 @@ public class LineMode {
 		}
 	}
 
-	public void treatCommand(String command){
+	public final void treatCommand(String command){
 		if(command.startsWith("exit")){
 			this.parser.save();
 			System.exit(0);

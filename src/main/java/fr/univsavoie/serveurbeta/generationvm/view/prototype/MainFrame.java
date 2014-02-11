@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MainFrame extends JFrame implements ActionListener{
 
-    private XMLParser xmlParser;
+	private XMLParser xmlParser;
 	//Header
 	private JLabel titre;
 	//info VM
@@ -35,7 +35,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private JPanel panelButtons;
 	private JPanel panelTitre;
 	//listener
-	
+
 	//magic number
 	private int width = 400;
 	private int height = 300;
@@ -51,6 +51,11 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}
 
+	/**
+	 * Initialise la fenetre principale
+	 * 
+	 * @author nicolas
+	 */
 	private void initialise(){
 
 		//header
@@ -71,12 +76,13 @@ public class MainFrame extends JFrame implements ActionListener{
 		mesPaquets.add("gedit");
 		mesPaquets.add("wget");
 		mesPaquets.add("openssh");
-        mesPaquets.add("lynx");
+		mesPaquets.add("lynx");
 
 		monModel = new DefaultListModel<String>();
 		listePaquets = new JList<String>(monModel);
-		for (String unPaquet : mesPaquets)
+		for (String unPaquet : mesPaquets){
 			monModel.addElement(unPaquet);
+		}
 		listePaquets.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
 
@@ -127,21 +133,22 @@ public class MainFrame extends JFrame implements ActionListener{
 		annuler.addActionListener(this);
 		valider.addActionListener(this);
 
-        this.xmlParser = XMLParser.createEmptyConfig();
+		this.xmlParser = XMLParser.createEmptyConfig();
 	}
 
 	public void actionPerformed(ActionEvent e) {
 
-		if(e.getSource() == annuler)
+		if(e.getSource() == annuler){
 			this.dispose();
+		}
 		if(e.getSource() == valider){
 
 			String infos = "Auteur : "+auteur.getText()+"\nNom VM : "+nomvm.getText()+"\nDescription : "+description.getText()+"\n";
 			List<String> paquetsSelectionnes = listePaquets.getSelectedValuesList();
 			for (String unPaquet : paquetsSelectionnes){
-                infos += unPaquet+", ";
-                this.xmlParser.addPackage(unPaquet);
-            }
+				infos += unPaquet+", ";
+				this.xmlParser.addPackage(unPaquet);
+			}
 			JOptionPane.showMessageDialog(null, infos);
 		}
 	}

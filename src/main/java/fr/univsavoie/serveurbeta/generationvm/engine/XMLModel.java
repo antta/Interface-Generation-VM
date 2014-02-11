@@ -122,7 +122,7 @@ public class XMLModel {
 		return templateNumber;
 	}
 
-	public void setTemplateNumber(int templateNumber) {
+	public final void setTemplateNumber(int templateNumber) {
 		this.templateNumber = templateNumber;
 	}
 
@@ -135,7 +135,7 @@ public class XMLModel {
 	 * 
 	 *@author nicolas
 	 */
-    private void createTree(){
+    private final void createTree(){
 
     	createAllElement();
     	assignAllAttributes();
@@ -315,8 +315,10 @@ public class XMLModel {
     private void createXMLviaTemplate(int choice){
     	
     	switch(choice){
-    	case 1 : createPackageTemplate(jeOSPackages());break;
-    	case 2 : createPackageTemplate(gnomePackages());break;
+    	case 1 :createPackageTemplate(jeOSPackages());
+    			break;
+    	case 2 :createPackageTemplate(gnomePackages());
+    			break;
     	default : throw new IllegalArgumentException();
     	}
     }

@@ -1,5 +1,10 @@
 package  fr.univsavoie.serveurbeta.generationvm.engine;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -7,9 +12,7 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
 
 /**
  * Class XMLParser
@@ -24,24 +27,25 @@ import java.io.IOException;
  */
 public final class XMLParser {
 
-    private static String xmlPath = "config.xml";
-    private XMLModel xmlModel;
-    private Element root;
+	private static String xmlPath = "config.xml";
+	private XMLModel xmlModel;
+	private Element root;
+	private static Logger logger = Logger.getLogger(XMLParser.class);
 
-    /**
-     * XMLParser
-     *
-     * Private constructor used by the factories to create new XMLParser
-     */
+	/**
+	 * XMLParser
+	 *
+	 * Private constructor used by the factories to create new XMLParser
+	 */
 	private XMLParser() {
-        this.xmlModel = new XMLModel();
+		this.xmlModel = new XMLModel();
 	}
-	
+
 	private XMLParser(int template) {
 		this.xmlModel = new XMLModel(template);
 	}
 
-    /**
+	/**
 	 * @return the xmlModel
 	 */
 	public XMLModel getXmlModel() {
@@ -70,82 +74,82 @@ public final class XMLParser {
 	}
 
 	/**
-     * createEmptyConfig
-     *
-     * A factory that create a new empty XML configuration.
-     *
-     *
-     * @return A new instance of XMLParser
-     */
-    public static XMLParser createEmptyConfig(){
-        return new XMLParser();
-    }
-    
-    public static XMLParser createEmptyConfig(int template){
-    	return new XMLParser(template);
-    }
+	 * createEmptyConfig
+	 *
+	 * A factory that create a new empty XML configuration.
+	 *
+	 *
+	 * @return A new instance of XMLParser
+	 */
+	public static XMLParser createEmptyConfig(){
+		return new XMLParser();
+	}
 
-    /**
-     * save
-     *
-     * Save the current configuration into the concrete xml file.
-     */
-    public void save(){
-        try
-        {
-        	File file = new File(XMLParser.xmlPath);
-        	if(!file.exists()){
-        		file.createNewFile();
-        	}
-            XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
-            out.output(this.xmlModel.fileRepresentationRoot(), new FileOutputStream(XMLParser.xmlPath));
-        }
-        catch (java.io.IOException e){
-            e.printStackTrace();
-        }
-    }
+	public static XMLParser createEmptyConfig(int template){
+		return new XMLParser(template);
+	}
 
-    /**
-     *
-     */
-    public void createNew(){
-        this.xmlModel = new XMLModel();
-    }
+	/**
+	 * save
+	 *
+	 * Save the current configuration into the concrete xml file.
+	 */
+	public void save(){
+		try
+		{
+			File file = new File(XMLParser.xmlPath);
+			if(!file.exists()){
+				file.createNewFile();
+			}
+			XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
+			out.output(this.xmlModel.fileRepresentationRoot(), new FileOutputStream(XMLParser.xmlPath));
+		}
+		catch (IOException e){
+			logger.error("IOException" + e.toString());
+		}
+	}
 
-    /**
-     * addPackage
-     *
-     * Add the given package
-     */
-    @Deprecated
-    public void addPackage(String packageName){
-        Attribute newPackage = new Attribute("name", packageName);
-        Element packages = this.root.getChild("packages");
-        if(packages != null)
-        {
-            packages.addContent(new Element("package").setAttribute(newPackage));
-            this.save();
-        }
-    }
+	/**
+	 *
+	 */
+	public void createNew(){
+		this.xmlModel = new XMLModel();
+	}
 
-    /**
-     * open
-     *
-     * Open the config.xml file that contain the kiwi configuration you want to edit
-     */
-    public void open(){
-        SAXBuilder sxb = new SAXBuilder();
-        try {
-            this.root = sxb.build(new File(XMLParser.xmlPath)).getRootElement();
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * addPackage
+	 *
+	 * Add the given package
+	 */
+	@Deprecated
+	public void addPackage(String packageName){
+		Attribute newPackage = new Attribute("name", packageName);
+		Element packages = this.root.getChild("packages");
+		if(packages != null)
+		{
+			packages.addContent(new Element("package").setAttribute(newPackage));
+			this.save();
+		}
+	}
 
-    public static void main(String[] args){
-        XMLParser parser = XMLParser.createEmptyConfig();
-        parser.save();
-    }
+	/**
+	 * open
+	 *
+	 * Open the config.xml file that contain the kiwi configuration you want to edit
+	 */
+	public void open(){
+		SAXBuilder sxb = new SAXBuilder();
+		try {
+			this.root = sxb.build(new File(XMLParser.xmlPath)).getRootElement();
+		} catch (JDOMException e) {
+			logger.error("JDOMException " + e.toString());
+		} catch (IOException e) {
+			logger.error("IOException " + e.toString());
+		}
+	}
+
+	public static void main(String[] args){
+		XMLParser parser = XMLParser.createEmptyConfig();
+		parser.save();
+	}
 }
