@@ -68,9 +68,9 @@ public class LineMode {
 	private void addPackage(String command){
 		String packageName = command.substring("--addpackage ".length());
 		if(packageName.split(" ").length>1){
-			this.parser.xmlModel.addPackage(packageName.split(" ")[0],packageName.split(" ")[1]);
+			this.parser.getXmlModel().addPackage(packageName.split(" ")[0],packageName.split(" ")[1]);
 		}else{
-			this.parser.xmlModel.addPackage(command.substring("--addpackage ".length()));
+			this.parser.getXmlModel().addPackage(command.substring("--addpackage ".length()));
 		}
 	}
 
@@ -85,11 +85,11 @@ public class LineMode {
 		}else if(command.startsWith("--addrepository")){
 			System.out.print("Not implemented yet");
 		}else if(command.startsWith("--setAuthor")){
-			this.parser.xmlModel.setAuthor(command.substring("--setAuthor ".length()));
+			this.parser.getXmlModel().setAuthor(command.substring("--setAuthor ".length()));
 		}else if(command.startsWith("--setContact")){
-			this.parser.xmlModel.setAuthorMail(command.substring("--setContact ".length()));
+			this.parser.getXmlModel().setAuthorMail(command.substring("--setContact ".length()));
 		}else if(command.startsWith("--setSpecification")){
-			this.parser.xmlModel.setSpecification(command.substring("--setSpecification ".length()));
+			this.parser.getXmlModel().setSpecification(command.substring("--setSpecification ".length()));
 		}
 		else if(command.startsWith("-t") || command.startsWith(("--template"))){
 			String tempName = command.split(" ")[1];

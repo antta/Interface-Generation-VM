@@ -42,6 +42,34 @@ public final class XMLParser {
 	}
 
     /**
+	 * @return the xmlModel
+	 */
+	public XMLModel getXmlModel() {
+		return xmlModel;
+	}
+
+	/**
+	 * @param xmlModel the xmlModel to set
+	 */
+	public void setXmlModel(XMLModel xmlModel) {
+		this.xmlModel = xmlModel;
+	}
+
+	/**
+	 * @return the root
+	 */
+	public Element getRoot() {
+		return root;
+	}
+
+	/**
+	 * @param root the root to set
+	 */
+	public void setRoot(Element root) {
+		this.root = root;
+	}
+
+	/**
      * createEmptyConfig
      *
      * A factory that create a new empty XML configuration.
