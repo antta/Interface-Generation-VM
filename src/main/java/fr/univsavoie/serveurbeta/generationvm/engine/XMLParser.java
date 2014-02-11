@@ -22,11 +22,11 @@ import java.io.IOException;
  *
  * @author Patrick-Edouard Roux
  */
-public class XMLParser {
+public final class XMLParser {
 
     private static String xmlPath = "config.xml";
-    public XMLModel xmlModel;
-    public Element root;
+    private XMLModel xmlModel;
+    private Element root;
 
     /**
      * XMLParser
@@ -34,7 +34,6 @@ public class XMLParser {
      * Private constructor used by the factories to create new XMLParser
      */
 	private XMLParser() {
-        //this.open();
         this.xmlModel = new XMLModel();
 	}
 	
@@ -119,7 +118,6 @@ public class XMLParser {
 
     public static void main(String[] args){
         XMLParser parser = XMLParser.createEmptyConfig();
-        //parser.xmlModel.addPackage("Patrick-Edouard");
         parser.save();
     }
 }

@@ -22,7 +22,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private JLabel labDescription;
 	private JTextField description;
 	//liste paquets
-	public ArrayList<String> mesPaquets;
+	private List<String> mesPaquets;
 	private DefaultListModel<String> monModel;
 	private JList<String> listePaquets;
 	//buttons sortie
@@ -35,11 +35,17 @@ public class MainFrame extends JFrame implements ActionListener{
 	private JPanel panelButtons;
 	private JPanel panelTitre;
 	//listener
+	
+	//magic number
+	private int width = 400;
+	private int height = 300;
+	private int gridWidth = 3;
+	private int gridHeight = 3;
 
 	public MainFrame (){
 
 		this.setTitle("Config.xml");
-		this.setSize(400, 300);
+		this.setSize(width, height);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.initialise();
 		this.setVisible(true);
@@ -83,7 +89,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		panelTitre.setLayout(new FlowLayout());
 		//init du panel info
 		panelInfos = new JPanel();
-		panelInfos.setLayout(new GridLayout(3,3));
+		panelInfos.setLayout(new GridLayout(gridWidth,gridHeight));
 		//init du panel Liste
 		panelListe = new JPanel();
 		panelListe.setLayout(new BorderLayout());
@@ -131,8 +137,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		if(e.getSource() == valider){
 
 			String infos = "Auteur : "+auteur.getText()+"\nNom VM : "+nomvm.getText()+"\nDescription : "+description.getText()+"\n";
-			List<String> paquetsSelectionnés = listePaquets.getSelectedValuesList();
-			for (String unPaquet : paquetsSelectionnés){
+			List<String> paquetsSelectionnes = listePaquets.getSelectedValuesList();
+			for (String unPaquet : paquetsSelectionnes){
                 infos += unPaquet+", ";
                 this.xmlParser.addPackage(unPaquet);
             }

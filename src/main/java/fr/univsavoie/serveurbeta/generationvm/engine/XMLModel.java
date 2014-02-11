@@ -329,7 +329,7 @@ public class XMLModel {
     	List<Attribute> listAttributeImage = new ArrayList<Attribute>();
 		listAttributeImage.add(new Attribute("type","image"));
 		listAttributeImage.add(new Attribute("patternType","onlyRequired"));
-		// liste des attributs de la balise <package type="bootstrap");
+		// liste des attributs de la balise <package type="bootstrap">
 		List<Attribute> listAttributeBootstrap = new ArrayList<Attribute>();
 		listAttributeBootstrap.add(new Attribute("type","bootstrap"));
 		// liste de liste d'attribut

@@ -109,7 +109,7 @@ public class LineMode {
 
 	public void treatArgs(String [] args){
 		//--template jeos --addpackage test --addpackage test2 --addpackage test3 bootstrap --setAuthor moi
-		String command = new String();
+		String command = "";
 		for (int i = 0; i < args.length; i++) {
 			if(args[i].startsWith("--")){
 				command = args[i];
