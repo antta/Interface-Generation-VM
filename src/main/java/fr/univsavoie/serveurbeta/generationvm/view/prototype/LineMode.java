@@ -37,7 +37,7 @@ public class LineMode {
 	}
 
 	public void displatOption(){
-		System.out.println("Usage :" +
+		System.out.print("Usage :" +
 				"\n-h                                   : Display this help" +
 				"\n-b   --build                         : Build the appliance, launching ./createAppliance" +
 				"\n ==      template managing        == " +
@@ -50,23 +50,21 @@ public class LineMode {
 				"\n--setAuthor author                     : Set the author name" +
 				"\n--setContact contact                   : Set your e-mail address" +
 				"\n--setSpecification description         : Describe your distribution" +
-				"");
+				"\n");
 	}
 
 	public void getCommand() {
 		String command = this.input.nextLine();
 		treatCommand(command);
 	}
-	
+
 	private void addPackages(String command){
-		//System.out.println("command "+command);
 		String[] listPackages = (command.substring("--addpackages ".length())).split(" ");
 		for (String packages : listPackages){
-			//System.out.println("packages "+packages);
 			this.addPackage("--addpackage "+packages);
 		}
 	}
-	
+
 	private void addPackage(String command){
 		String packageName = command.substring("--addpackage ".length());
 		if(packageName.split(" ").length>1){
@@ -77,22 +75,15 @@ public class LineMode {
 	}
 
 	public void treatCommand(String command){
-		//String command = this.input.nextLine();
 		if(command.startsWith("exit")){
 			this.parser.save();
 			System.exit(0);
 		}else if(command.startsWith("--addpackages")){
 			this.addPackages(command);
 		}else if(command.startsWith("--addpackage")){
-			//String packageName = command.substring("--addpackage ".length());
-			//if(packageName.split(" ").length>1){
-				//this.parser.xmlModel.addPackage(packageName.split(" ")[0],packageName.split(" ")[1]);
-			//}else{
-				//this.parser.xmlModel.addPackage(command.substring("--addpackage ".length()));
-			//}
 			this.addPackage(command);
 		}else if(command.startsWith("--addrepository")){
-			System.out.println("Not implemented yet");
+			System.out.print("Not implemented yet");
 		}else if(command.startsWith("--setAuthor")){
 			this.parser.xmlModel.setAuthor(command.substring("--setAuthor ".length()));
 		}else if(command.startsWith("--setContact")){
@@ -103,13 +94,14 @@ public class LineMode {
 		else if(command.startsWith("-t") || command.startsWith(("--template"))){
 			String tempName = command.split(" ")[1];
 			int template = 0;
-			if(tempName.equals("jeos"))
+			if(tempName.equals("jeos")){
 				template = 1;
-			else if (tempName.equals("gnome"))
+			}
+			else if (tempName.equals("gnome")){
 				template = 2;
+			}
 			this.parser = XMLParser.createEmptyConfig(template);
 		}
-
 		else{
 			this.displatOption();
 		}
@@ -121,15 +113,11 @@ public class LineMode {
 		for (int i = 0; i < args.length; i++) {
 			if(args[i].startsWith("--")){
 				command = args[i];
-				//System.out.println("args["+i+"] : "+args[i]);
 				while(++i<args.length && !(args[i].startsWith("--") || args[i].startsWith("-"))){
 					command += " " + args[i];
-					//System.out.println("+1 dans le while("+i+")");
 				}
 				i--;
-				//System.out.println("command : "+command);
 				treatCommand(command);
-				//System.out.println("+1 dans le for("+i+")");
 			}
 		}
 		treatCommand("exit");	
@@ -137,9 +125,11 @@ public class LineMode {
 
 
 	public static void main (String[] args){
-		if (args.length > 0)
+		if (args.length > 0){
 			new LineMode(args);
-		else
+		}
+		else{
 			new LineMode();
+		}
 	}
 }

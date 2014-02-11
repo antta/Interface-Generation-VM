@@ -45,66 +45,65 @@ public class XMLModel {
     		private Element boottheme;
     		private Element timezone;
     		private Element hwclock;
-    	private Element users_root;
-    		private Element user_root;
-    	//private List<Element> listPackagesType = new ArrayList<Element>();
+    	private Element usersRoot;
+    		private Element userRoot;
     	
     		private List<Element> listRepo = new ArrayList<Element>();
     	
-    private String tag_image              	= "image";
-    private String tag_description        	= "description";
-    private String tag_author             	= "author";
-    private String tag_contact            	= "contact";
-    private String tag_specification      	= "specification";
-    private String tag_preferences        	= "preferences";
-	private String tag_type               	= "type";
-	private String tag_machine            	= "machine";
-	private String tag_vmdisk             	= "vmdisk";
-	private String tag_vmdvd              	= "vmdvd";
-	private String tag_vmnic              	= "vmnic";
-	private String tag_size               	= "size";
-	private String tag_version            	= "version";
-	private String tag_packagemanager     	= "packagemanager";
-	private String tag_rpmchecksignatures 	= "rpm-check-signatures";
-	private String tag_rpmforce           	= "rpm-force";
-	private String tag_boottheme          	= "boot-theme";
-	private String tag_timezone           	= "timezone";
-	private String tag_hwclock            	= "hwclock";
-	private String tag_users              	= "users";
-	private String tag_user               	= "user";
-	private String tag_packages				= "packages";
-	private String tag_package				= "package";
-	private String tag_repository			= "repository";
-	private String tag_source				= "source";
+    private String tagImage              	= "image";
+    private String tagDescription        	= "description";
+    private String tagAauthor             	= "author";
+    private String tagContact            	= "contact";
+    private String tagSpecification      	= "specification";
+    private String tagPreferences        	= "preferences";
+	private String tagType               	= "type";
+	private String tagMachine            	= "machine";
+	private String tagVmdisk             	= "vmdisk";
+	private String tagVmdvd              	= "vmdvd";
+	private String tagVmnic              	= "vmnic";
+	private String tagSize               	= "size";
+	private String tagVersion            	= "version";
+	private String tagPackagemanager     	= "packagemanager";
+	private String tagRpmchecksignatures 	= "rpm-check-signatures";
+	private String tagRpmforce           	= "rpm-force";
+	private String tagBoottheme          	= "boot-theme";
+	private String tagTimezone           	= "timezone";
+	private String tagHwclock            	= "hwclock";
+	private String tagUsers              	= "users";
+	private String tagUser               	= "user";
+	private String tagPackages				= "packages";
+	private String tagPackage				= "package";
+	private String tagRepository			= "repository";
+	private String tagSource				= "source";
 	
-	private List<Attribute> attribute_image				= new ArrayList<Attribute>();
-	private List<Attribute> attribute_description       = new ArrayList<Attribute>();
-	private List<Attribute> attribute_author            = new ArrayList<Attribute>();
-	private List<Attribute> attribute_contact           = new ArrayList<Attribute>();
-	private List<Attribute> attribute_specification     = new ArrayList<Attribute>();
-	private List<Attribute> attribute_preferences       = new ArrayList<Attribute>();
-	private List<Attribute> attribute_type              = new ArrayList<Attribute>();
-	private List<Attribute> attribute_machine           = new ArrayList<Attribute>();
-	private List<Attribute> attribute_vmdisk            = new ArrayList<Attribute>();
-	private List<Attribute> attribute_vmdvd             = new ArrayList<Attribute>();
-	private List<Attribute> attribute_vmnic             = new ArrayList<Attribute>();
-	private List<Attribute> attribute_size              = new ArrayList<Attribute>();
-	private List<Attribute> attribute_version           = new ArrayList<Attribute>();
-	private List<Attribute> attribute_packagemanager    = new ArrayList<Attribute>();
-	private List<Attribute> attribute_rpmchecksignatures= new ArrayList<Attribute>();
-	private List<Attribute> attribute_rpmforce          = new ArrayList<Attribute>();
-	private List<Attribute> attribute_boottheme         = new ArrayList<Attribute>();
-	private List<Attribute> attribute_timezone          = new ArrayList<Attribute>();
-	private List<Attribute> attribute_hwclock           = new ArrayList<Attribute>();
-	private List<Attribute> attribute_users_root        = new ArrayList<Attribute>();
-	private List<Attribute> attribute_user              = new ArrayList<Attribute>();
+	private List<Attribute> attributeImage				= new ArrayList<Attribute>();
+	private List<Attribute> attributeDescription      	= new ArrayList<Attribute>();
+	private List<Attribute> attributeAuthor           	= new ArrayList<Attribute>();
+	private List<Attribute> attributeContact           	= new ArrayList<Attribute>();
+	private List<Attribute> attributeSpecification     	= new ArrayList<Attribute>();
+	private List<Attribute> attributePreferences       	= new ArrayList<Attribute>();
+	private List<Attribute> attributeType              	= new ArrayList<Attribute>();
+	private List<Attribute> attributeMachine           	= new ArrayList<Attribute>();
+	private List<Attribute> attributeVmdisk            	= new ArrayList<Attribute>();
+	private List<Attribute> attributeVmdvd             	= new ArrayList<Attribute>();
+	private List<Attribute> attributeVmnic             	= new ArrayList<Attribute>();
+	private List<Attribute> attributeSize              	= new ArrayList<Attribute>();
+	private List<Attribute> attributeVersion           	= new ArrayList<Attribute>();
+	private List<Attribute> attributePackagemanager    	= new ArrayList<Attribute>();
+	private List<Attribute> attributeRpmchecksignatures	= new ArrayList<Attribute>();
+	private List<Attribute> attributeRpmforce          	= new ArrayList<Attribute>();
+	private List<Attribute> attributeBoottheme			= new ArrayList<Attribute>();
+	private List<Attribute> attributeTimezone           = new ArrayList<Attribute>();
+	private List<Attribute> attributeHwclock            = new ArrayList<Attribute>();
+	private List<Attribute> attributeUsersRoot 		    = new ArrayList<Attribute>();
+	private List<Attribute> attributeUser               = new ArrayList<Attribute>();
 	
-	private List<Content> content_image                 = new ArrayList<Content>();
-	private List<Content> content_description           = new ArrayList<Content>();
-	private List<Content> content_preferences           = new ArrayList<Content>();
-	private List<Content> content_type                  = new ArrayList<Content>();
-	private List<Content> content_machine               = new ArrayList<Content>();
-	private List<Content> content_users                 = new ArrayList<Content>();
+	private List<Content> contentImage	                = new ArrayList<Content>();
+	private List<Content> contentDescription            = new ArrayList<Content>();
+	private List<Content> contentPreferences            = new ArrayList<Content>();
+	private List<Content> contentType                   = new ArrayList<Content>();
+	private List<Content> contentMachine                = new ArrayList<Content>();
+	private List<Content> contentUsers                  = new ArrayList<Content>();
 
 	private int templateNumber = 1;
 	
@@ -150,30 +149,28 @@ public class XMLModel {
      */
 	private void createAllElement(){
     	
-    	image = new Element(tag_image);
-		description = new Element(tag_description);
-			author = new Element(tag_author);
-			contact = new Element(tag_contact);
-			specification = new Element(tag_specification);
-        preferences = new Element(tag_preferences);
-        	type = new Element(tag_type);
-        		machine = new Element(tag_machine);
-        			vmdisk = new Element(tag_vmdisk);
-        			vmdvd = new Element(tag_vmdvd);
-        			vmnic = new Element(tag_vmnic);
-        		size = new Element(tag_size);
-    		version = new Element(tag_version);
-    		packagemanager = new Element(tag_packagemanager);
-    		rpmchecksignatures = new Element(tag_rpmchecksignatures);
-    		rpmforce = new Element(tag_rpmforce);
-    		boottheme = new Element(tag_boottheme);
-    		timezone = new Element(tag_timezone);
-    		hwclock = new Element(tag_hwclock);
-    	users_root = new Element(tag_users);
-    		user_root = new Element(tag_user);
-    	new Element(tag_packages);
-    		//createPackagesImage();
-    		//createPackagesBootstrap();
+    	image = new Element(tagImage);
+		description = new Element(tagDescription);
+			author = new Element(tagAauthor);
+			contact = new Element(tagContact);
+			specification = new Element(tagSpecification);
+        preferences = new Element(tagPreferences);
+        	type = new Element(tagType);
+        		machine = new Element(tagMachine);
+        			vmdisk = new Element(tagVmdisk);
+        			vmdvd = new Element(tagVmdvd);
+        			vmnic = new Element(tagVmnic);
+        		size = new Element(tagSize);
+    		version = new Element(tagVersion);
+    		packagemanager = new Element(tagPackagemanager);
+    		rpmchecksignatures = new Element(tagRpmchecksignatures);
+    		rpmforce = new Element(tagRpmforce);
+    		boottheme = new Element(tagBoottheme);
+    		timezone = new Element(tagTimezone);
+    		hwclock = new Element(tagHwclock);
+    	usersRoot = new Element(tagUsers);
+    		userRoot = new Element(tagUser);
+    	new Element(tagPackages);
     		createXMLviaTemplate(this.getTemplateNumber());
     		createRepoDefault();
     		
@@ -186,88 +183,77 @@ public class XMLModel {
 	 */
     private void assignAllAttributes(){
     	
-    	attribute_image.add(new Attribute("name","SuseAxway"));
-    	attribute_image.add(new Attribute("displayname", "SuseAxway"));
-    	attribute_image.add(new Attribute("schemaversion", "5.2"));
-    	image.setAttributes(attribute_image);
+    	attributeImage.add(new Attribute("name","SuseAxway"));
+    	attributeImage.add(new Attribute("displayname", "SuseAxway"));
+    	attributeImage.add(new Attribute("schemaversion", "5.2"));
+    	image.setAttributes(attributeImage);
     	
-    	attribute_description.add(new Attribute("type","system"));
-    	description.setAttributes(attribute_description);
+    	attributeDescription.add(new Attribute("type","system"));
+    	description.setAttributes(attributeDescription);
     	
-    	//attribute_author.add(new Attribute(null,null));
-    	author.setAttributes(attribute_author);
+    	author.setAttributes(attributeAuthor);
 
-        //attribute_contact.add(new Attribute(null,null));
-    	contact.setAttributes(attribute_contact);
+    	contact.setAttributes(attributeContact);
 
-        //attribute_specification.add(new Attribute(null, null));
-    	specification.setAttributes(attribute_specification);
+    	specification.setAttributes(attributeSpecification);
 
-        //attribute_preferences.add(new Attribute(null, null));
-    	preferences.setAttributes(attribute_preferences);
+    	preferences.setAttributes(attributePreferences);
     	
-    	attribute_type.add(new Attribute("checkprebuilt", "true"));
-    	attribute_type.add(new Attribute("boot", "vmxboot/suse-12.3"));
-    	attribute_type.add(new Attribute("fsnocheck", "true"));
-    	attribute_type.add(new Attribute("filesystem", "ext3"));
-    	attribute_type.add(new Attribute("bootloader", "grub2"));
-    	attribute_type.add(new Attribute("primary", "true"));
-    	attribute_type.add(new Attribute("format", "vmdk"));
-    	attribute_type.add(new Attribute("kernelcmdline", "quiet"));
-    	attribute_type.add(new Attribute("image", "vmx"));
-    	type.setAttributes(attribute_type);
+    	attributeType.add(new Attribute("checkprebuilt", "true"));
+    	attributeType.add(new Attribute("boot", "vmxboot/suse-12.3"));
+    	attributeType.add(new Attribute("fsnocheck", "true"));
+    	attributeType.add(new Attribute("filesystem", "ext3"));
+    	attributeType.add(new Attribute("bootloader", "grub2"));
+    	attributeType.add(new Attribute("primary", "true"));
+    	attributeType.add(new Attribute("format", "vmdk"));
+    	attributeType.add(new Attribute("kernelcmdline", "quiet"));
+    	attributeType.add(new Attribute("image", "vmx"));
+    	type.setAttributes(attributeType);
     	
-    	attribute_machine.add(new Attribute("memory", "1024"));
-    	attribute_machine.add(new Attribute("arch", "x86_64"));
-    	attribute_machine.add(new Attribute("guestOS", "suse-64"));
-    	machine.setAttributes(attribute_machine);
+    	attributeMachine.add(new Attribute("memory", "1024"));
+    	attributeMachine.add(new Attribute("arch", "x86_64"));
+    	attributeMachine.add(new Attribute("guestOS", "suse-64"));
+    	machine.setAttributes(attributeMachine);
     	
-    	attribute_vmdisk.add(new Attribute("controller", "scsi"));
-    	attribute_vmdisk.add(new Attribute("id", "0"));
-    	vmdisk.setAttributes(attribute_vmdisk);
+    	attributeVmdisk.add(new Attribute("controller", "scsi"));
+    	attributeVmdisk.add(new Attribute("id", "0"));
+    	vmdisk.setAttributes(attributeVmdisk);
     	
-    	attribute_vmdvd.add(new Attribute("controller", "ide"));
-    	attribute_vmdvd.add(new Attribute("id", "0"));
-    	vmdvd.setAttributes(attribute_vmdvd);
+    	attributeVmdvd.add(new Attribute("controller", "ide"));
+    	attributeVmdvd.add(new Attribute("id", "0"));
+    	vmdvd.setAttributes(attributeVmdvd);
 
-        attribute_vmnic.add(new Attribute("driver", "e1000"));
-        attribute_vmnic.add(new Attribute("interface", "0"));
-        attribute_vmnic.add(new Attribute("mode", "bridged"));
-        vmnic.setAttributes(attribute_vmnic);
+        attributeVmnic.add(new Attribute("driver", "e1000"));
+        attributeVmnic.add(new Attribute("interface", "0"));
+        attributeVmnic.add(new Attribute("mode", "bridged"));
+        vmnic.setAttributes(attributeVmnic);
         
-        attribute_size.add(new Attribute("unit", "M"));
-        attribute_size.add(new Attribute("additive", "false"));
-        size.setAttributes(attribute_size);
+        attributeSize.add(new Attribute("unit", "M"));
+        attributeSize.add(new Attribute("additive", "false"));
+        size.setAttributes(attributeSize);
         
-    	//attribute_version.add(new Attribute(null, null));
-    	version.setAttributes(attribute_version);
+    	version.setAttributes(attributeVersion);
 
-        //attribute_packagemanager.add(new Attribute(null, null));
-    	packagemanager.setAttributes(attribute_packagemanager);
+    	packagemanager.setAttributes(attributePackagemanager);
 
-        //attribute_rpmchecksignatures.add(new Attribute(null, null));
-    	rpmchecksignatures.setAttributes(attribute_rpmchecksignatures);
+    	rpmchecksignatures.setAttributes(attributeRpmchecksignatures);
 
-        //attribute_rpmforce.add(new Attribute(null, null));
-    	rpmforce.setAttributes(attribute_rpmforce);
+    	rpmforce.setAttributes(attributeRpmforce);
 
-        //attribute_boottheme.add(new Attribute(null, null));
-    	boottheme.setAttributes(attribute_boottheme);
+    	boottheme.setAttributes(attributeBoottheme);
 
-        //attribute_timezone.add(new Attribute(null, null));
-    	timezone.setAttributes(attribute_timezone);
+    	timezone.setAttributes(attributeTimezone);
 
-        //attribute_hwclock.add(new Attribute(null, null));
-    	hwclock.setAttributes(attribute_hwclock);
+    	hwclock.setAttributes(attributeHwclock);
 
-    	attribute_users_root.add(new Attribute("group", "root"));
-    	users_root.setAttributes(attribute_users_root);  	
+    	attributeUsersRoot.add(new Attribute("group", "root"));
+    	usersRoot.setAttributes(attributeUsersRoot);  	
     	
-    	attribute_user.add(new Attribute("name","root"));
-    	attribute_user.add(new Attribute("pwd","$1$O18RH8FB$Hg7xawIuJlQzLfawBKb/H1"));
-    	attribute_user.add(new Attribute("home","/root"));
-    	attribute_user.add(new Attribute("shell","/bin/bash"));
-    	user_root.setAttributes(attribute_user);
+    	attributeUser.add(new Attribute("name","root"));
+    	attributeUser.add(new Attribute("pwd","$1$O18RH8FB$Hg7xawIuJlQzLfawBKb/H1"));
+    	attributeUser.add(new Attribute("home","/root"));
+    	attributeUser.add(new Attribute("shell","/bin/bash"));
+    	userRoot.setAttributes(attributeUser);
     	
     }
     
@@ -278,42 +264,41 @@ public class XMLModel {
      */
     private void addAllContent() {
 		
-    	content_image.add(description);
-    	content_image.add(preferences);
-    	content_image.add(users_root);
-    	//content_image.addAll(listPackagesType);
-    	content_image.addAll(listRepo);
-    	image.addContent(content_image);
+    	contentImage.add(description);
+    	contentImage.add(preferences);
+    	contentImage.add(usersRoot);
+    	contentImage.addAll(listRepo);
+    	image.addContent(contentImage);
     	
-    	content_description.add(author);
-    	content_description.add(contact);
-    	content_description.add(specification);
-    	description.addContent(content_description);
+    	contentDescription.add(author);
+    	contentDescription.add(contact);
+    	contentDescription.add(specification);
+    	description.addContent(contentDescription);
     	
     	author.addContent("VM'owner");
     	contact.addContent("owner@domain.com");
     	specification.addContent("Tiny Suse");
     	
-    	content_preferences.add(type);
-        content_preferences.add(version);
-        content_preferences.add(packagemanager);
-        content_preferences.add(rpmchecksignatures);
-        content_preferences.add(rpmforce);
-        content_preferences.add(boottheme);
-        content_preferences.add(timezone);
-        content_preferences.add(hwclock);
-        preferences.addContent(content_preferences);
+    	contentPreferences.add(type);
+        contentPreferences.add(version);
+        contentPreferences.add(packagemanager);
+        contentPreferences.add(rpmchecksignatures);
+        contentPreferences.add(rpmforce);
+        contentPreferences.add(boottheme);
+        contentPreferences.add(timezone);
+        contentPreferences.add(hwclock);
+        preferences.addContent(contentPreferences);
         
-        content_type.add(machine);
-        content_type.add(size);
-        type.addContent(content_type);
+        contentType.add(machine);
+        contentType.add(size);
+        type.addContent(contentType);
         
         size.addContent("16384");
         
-        content_machine.add(vmdisk);
-        content_machine.add(vmdvd);
-        content_machine.add(vmnic);
-        machine.addContent(content_machine);
+        contentMachine.add(vmdisk);
+        contentMachine.add(vmdvd);
+        contentMachine.add(vmnic);
+        machine.addContent(contentMachine);
 
         version.addContent("1.0.0");
         packagemanager.addContent("zypper");
@@ -323,11 +308,8 @@ public class XMLModel {
         timezone.addContent("UTC");
         hwclock.addContent("localtime");
         
-        content_users.add(user_root);
-        users_root.addContent(content_users);
-        
-        //packages.addContent(content_packages);
-        	
+        contentUsers.add(userRoot);
+        usersRoot.addContent(contentUsers);        	
 	}
     
     private void createXMLviaTemplate(int choice){
@@ -367,9 +349,8 @@ public class XMLModel {
     
     private void createPackages (String typePackage, List<Attribute> listAttribute, List<String> listPackage){
     	
-    	Element temporaryElement = new Element(tag_packages);
+    	Element temporaryElement = new Element(tagPackages);
     	temporaryElement.setAttributes(listAttribute);
-    	//listPackagesType.add(temporaryElement);
     	image.addContent(temporaryElement);
 
     	for(String packageName : listPackage){
@@ -385,13 +366,11 @@ public class XMLModel {
     	listPath.add("http://download.opensuse.org/update/12.3/");
     	listTypeRepo.add("yast2");
     	listTypeRepo.add("rpm-md");
-    	listRepo.add(new Element(tag_repository));
-    	listRepo.add(new Element(tag_repository));
-    	//System.out.println("size listPath :"+listPath.size()+"\tsize listTypeRepo :"+listTypeRepo.size()+"\tsize listRepo :"+listRepo.size());
+    	listRepo.add(new Element(tagRepository));
+    	listRepo.add(new Element(tagRepository));
     	for(int i = 0; i < listRepo.size(); i++){
-    		//System.out.println("i :"+i+"\n");
     		listRepo.get(i).setAttribute("type",listTypeRepo.get(i));
-    		listRepo.get(i).addContent(new Element(tag_source).setAttribute("path",listPath.get(i)));
+    		listRepo.get(i).addContent(new Element(tagSource).setAttribute("path",listPath.get(i)));
     	}
     
     }
@@ -402,7 +381,7 @@ public class XMLModel {
     	listTemp.add("aaa_base");
 	    listTemp.add("branding-openSUSE");
 		listTemp.add("patterns-openSUSE-base");
-		listTemp.add("grub2");
+		listTemp.add("grub");
 		listTemp.add("hwinfo");
 		listTemp.add("iputils");
 		listTemp.add("kernel-default");
@@ -457,32 +436,6 @@ public class XMLModel {
 		return listTemp;
 
     }
-    
-	/*private List<String> kiwiPackages(){
-
-	    List<String> listTemp = new ArrayList<String>();
-		listTemp.add("kiwi-desc-vmxboot");
-		listTemp.add("kiwi-desc-netboot-requires");
-		listTemp.add("kiwi-image-livecd-kde-snapshot");
-		listTemp.add("kiwi-image-livecd-x11-snapshot");
-		listTemp.add("kiwi-image-livecd-gnome-snapshot");
-		listTemp.add("kiwi-desc-vmxboot-requires");
-		listTemp.add("kiwi-desc-oemboot-requires");
-		listTemp.add("kiwi-instsource-plugins-openSUSE-12-1");
-		listTemp.add("kiwi-desc-isoboot-requires");
-		listTemp.add("kiwi-media-requires");
-		listTemp.add("kiwi-templates");
-		listTemp.add("kiwi-instsource");
-		listTemp.add("kiwi-doc");
-		listTemp.add("kiwi-tools");
-		listTemp.add("kiwi-desc-oemboot");
-		listTemp.add("kiwi-config-openSUSE");
-		listTemp.add("kiwi-desc-netboot");
-		listTemp.add("kiwi-pxeboot");
-		listTemp.add("kiwi-desc-isoboot");
-		listTemp.add("kiwi");
-		return listTemp;
-	}*/
 	
 	private List<String> bootstrapPackages(){
 		
@@ -502,7 +455,7 @@ public class XMLModel {
      * @param author The author name to be set
      */
     public void setAuthor(String author){
-        this.image.getChild(tag_description).getChild(tag_author).setText(author);
+        this.image.getChild(tagDescription).getChild(tagAauthor).setText(author);
     }
 
     /**
@@ -513,7 +466,7 @@ public class XMLModel {
      * @param mail The mail to be set
      */
     public void setAuthorMail(String mail){
-        this.image.getChild(tag_description).getChild(tag_contact).setText(mail);
+        this.image.getChild(tagDescription).getChild(tagContact).setText(mail);
     }
 
     /**
@@ -524,7 +477,7 @@ public class XMLModel {
      * @param specification The mail to be set
      */
     public void setSpecification(String specification){
-        this.image.getChild(tag_description).getChild(tag_specification).setText(specification);
+        this.image.getChild(tagDescription).getChild(tagSpecification).setText(specification);
     }
 
     /**
@@ -552,7 +505,7 @@ public class XMLModel {
             for(Attribute a : e.getAttributes()){
                 if(a.getName().equals("type")) {
                     if(a.getValue().equals(packageType)) {
-                        e.addContent(new Element(this.tag_package).setAttribute("name",packageName));
+                        e.addContent(new Element(this.tagPackage).setAttribute("name",packageName));
                         return;
                     }
                 }
@@ -576,13 +529,13 @@ public class XMLModel {
             for(Attribute a : e.getAttributes()){
                 if(a.getName().equals("group")) {
                     if(a.getValue().equals(groupType)) {
-                        e.addContent(new Element(this.tag_user).setAttributes(userAttributes));
+                        e.addContent(new Element(this.tagUser).setAttributes(userAttributes));
                         return;
                     }
                 }
             }
             // if user group doesn't exist we need to create it
-            e.addContent(new Element(groupType).addContent(new Element(this.tag_user).setAttributes(userAttributes)));
+            e.addContent(new Element(groupType).addContent(new Element(this.tagUser).setAttributes(userAttributes)));
         }
     }
 
@@ -601,7 +554,7 @@ public class XMLModel {
             for(Attribute a : e.getAttributes()){
                 if(a.getName().equals("type")) {
                     if(a.getValue().equals(repositoryType)) {
-                        e.addContent(new Element(this.tag_repository).setAttribute("path",repositoryURL));
+                        e.addContent(new Element(this.tagRepository).setAttribute("path",repositoryURL));
                         return;
                     }
                 }
