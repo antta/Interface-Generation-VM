@@ -13,7 +13,7 @@ public class XMLModelTest {
 	Element root;
 		
 	public XMLModelTest(){
-		model = XMLParser.createEmptyConfig().xmlModel;
+		model = XMLParser.createEmptyConfig().getXmlModel();
 		root = model.fileRepresentationRoot();
 	}
 	
