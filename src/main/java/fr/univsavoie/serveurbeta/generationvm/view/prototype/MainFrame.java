@@ -147,7 +147,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			List<String> paquetsSelectionnes = listePaquets.getSelectedValuesList();
 			for (String unPaquet : paquetsSelectionnes){
 				infos += unPaquet+", ";
-				this.xmlParser.addPackage(unPaquet);
+				this.xmlParser.getXmlModel().addPackage(unPaquet);
 			}
 			JOptionPane.showMessageDialog(null, infos);
 		}

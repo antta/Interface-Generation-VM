@@ -203,7 +203,7 @@ public class XMLModel {
     	attributeType.add(new Attribute("boot", "vmxboot/suse-12.3"));
     	attributeType.add(new Attribute("fsnocheck", "true"));
     	attributeType.add(new Attribute("filesystem", "ext3"));
-    	attributeType.add(new Attribute("bootloader", "grub2"));
+    	attributeType.add(new Attribute("bootloader", "grub"));	//Change to grub2 if it gets patched
     	attributeType.add(new Attribute("primary", "true"));
     	attributeType.add(new Attribute("format", "vmdk"));
     	attributeType.add(new Attribute("kernelcmdline", "quiet"));
@@ -551,7 +551,7 @@ public class XMLModel {
      * @param repositoryType see http://doc.opensuse.org/projects/kiwi/doc/#sec.description.repository
      */
     public void addRepository(String repositoryURL, String repositoryType){
-        List<Element> packagesList = this.image.getChildren("packages");
+        List<Element> packagesList = this.image.getChildren("repository");
         for(Element e : packagesList){
             for(Attribute a : e.getAttributes()){
                 if(a.getName().equals("type")) {

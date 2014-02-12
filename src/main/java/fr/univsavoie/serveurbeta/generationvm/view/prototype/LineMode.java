@@ -12,11 +12,13 @@ import java.util.Scanner;
  * To change this template use File | Settings | File Templates.
  *
  * This class is design to give an line code user interface.
- * The goal is to use the api via an ssh connexion to a distant server.
+ * The goal is to use the api via an ssh connection to a distant server.
+ * Or to be use by jenkins in a line command 'java -jar LineMode [options][args]'
  */
 public class LineMode {
 
 	private XMLParser parser;
+
 	private Scanner input;
 
 	public LineMode(){
@@ -38,18 +40,18 @@ public class LineMode {
 
 	public void displatOption(){
 		System.out.print("Usage :" +
-				"\n-h                                   : Display this help" +
-				"\n-b   --build                         : Build the appliance, launching ./createAppliance" +
+				"\n-h                                  		: Display this help" +
+				"\n-b   --build                        		: Build the appliance, launching ./createAppliance" +
 				"\n ==      template managing        == " +
-				"\n-t   --template   jeos | gnome       : Create a new configuration with predefined package. (jeos | gnome | (maybe others) )" +
+				"\n-t   --template   jeos | gnome       	: Create a new configuration with predefined package. (jeos | gnome | (maybe others) )" +
 				"\n ==      package  managing        ==" +
-				"\n--addpackage packageName [packageType] : Add the package to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
-				"\n--addpackages listPackages             : Add all the packages to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
-				"\n--addrepository repositoryName         : Add the package to the configuration. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
+				"\n--addpackage packageName [packageType] 	: Add the package to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
+				"\n--addpackages listPackages       		: Add all the packages to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
+				"\n--addrepository repoURL repoType 		: Add the package to the configuration. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
 				"\n ==        vm    managing         ==" +
-				"\n--setAuthor author                     : Set the author name" +
-				"\n--setContact contact                   : Set your e-mail address" +
-				"\n--setSpecification description         : Describe your distribution" +
+				"\n--setAuthor author                    	: Set the author name" +
+				"\n--setContact contact                   	: Set your e-mail address" +
+				"\n--setSpecification description         	: Describe your distribution" +
 				"\n");
 	}
 
@@ -73,6 +75,13 @@ public class LineMode {
 			this.parser.getXmlModel().addPackage(command.substring("--addpackage ".length()));
 		}
 	}
+	
+	private void addRepository(String command){
+		String repositoryArg = command.substring("--addrepository ".length());
+		
+		this.parser.getXmlModel().addRepository(repositoryArg, repositoryArg);
+		
+	}
 
 	public final void treatCommand(String command){
 		if(command.startsWith("exit")){
@@ -83,7 +92,7 @@ public class LineMode {
 		}else if(command.startsWith("--addpackage")){
 			this.addPackage(command);
 		}else if(command.startsWith("--addrepository")){
-			System.out.print("Not implemented yet");
+			this.addRepository(command);
 		}else if(command.startsWith("--setAuthor")){
 			this.parser.getXmlModel().setAuthor(command.substring("--setAuthor ".length()));
 		}else if(command.startsWith("--setContact")){
@@ -100,7 +109,7 @@ public class LineMode {
 			else if (tempName.equals("gnome")){
 				template = 2;
 			}
-			this.parser = XMLParser.createEmptyConfig(template);
+			this.parser = XMLParser.createConfig(template);
 		}
 		else{
 			this.displatOption();
@@ -122,7 +131,14 @@ public class LineMode {
 		}
 		treatCommand("exit");	
 	}
-
+	
+	/**
+	 * Get the parser of parser of this view, using it for testing
+	 * @return
+	 */
+	public XMLParser getParser() {
+		return parser;
+	}
 
 	public static void main (String[] args){
 		if (args.length > 0){

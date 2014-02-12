@@ -17,11 +17,9 @@ import org.jdom2.output.XMLOutputter;
 /**
  * Class XMLParser
  *
- * V0.0.0.2 pre alpha
- *
- * Just a prototype to modify an existing xml file
- * addPackage will be remove or reimplemented, indeed most of function are likely hard coded
- *
+ * beta version
+ * 
+ * Design to be use with XMLModel, using it as a factory
  *
  * @author Patrick-Edouard Roux
  */
@@ -40,7 +38,14 @@ public final class XMLParser {
 	private XMLParser() {
 		this.xmlModel = new XMLModel();
 	}
-
+	
+	/**
+	 * XMLParser
+	 * 
+	 * Create an XML model using a template
+	 * 
+	 * @param template
+	 */
 	private XMLParser(int template) {
 		this.xmlModel = new XMLModel(template);
 	}
@@ -78,14 +83,24 @@ public final class XMLParser {
 	 *
 	 * A factory that create a new empty XML configuration.
 	 *
-	 *
 	 * @return A new instance of XMLParser
 	 */
 	public static XMLParser createEmptyConfig(){
 		return new XMLParser();
 	}
 
-	public static XMLParser createEmptyConfig(int template){
+	/**
+	 * createConfig
+	 * 
+	 * Create a configuration following the given template
+	 * 
+	 * @param template <ul>
+	 * 					<li><b>1</b> JustEnough</li> 
+	 * 					<li><b>2</b> Gnome</li>
+	 * 				   </ul>
+	 * @return A new instance of XMLParser corresponding to the template
+	 */
+	public static XMLParser createConfig(int template){
 		return new XMLParser(template);
 	}
 
@@ -106,29 +121,6 @@ public final class XMLParser {
 		}
 		catch (IOException e){
 			logger.error("IOException" + e.toString());
-		}
-	}
-
-	/**
-	 *
-	 */
-	public void createNew(){
-		this.xmlModel = new XMLModel();
-	}
-
-	/**
-	 * addPackage
-	 *
-	 * Add the given package
-	 */
-	@Deprecated
-	public void addPackage(String packageName){
-		Attribute newPackage = new Attribute("name", packageName);
-		Element packages = this.root.getChild("packages");
-		if(packages != null)
-		{
-			packages.addContent(new Element("package").setAttribute(newPackage));
-			this.save();
 		}
 	}
 
