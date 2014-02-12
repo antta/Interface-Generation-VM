@@ -551,17 +551,11 @@ public class XMLModel {
      * @param repositoryType see http://doc.opensuse.org/projects/kiwi/doc/#sec.description.repository
      */
     public void addRepository(String repositoryURL, String repositoryType){
-        List<Element> packagesList = this.image.getChildren("repository");
-        for(Element e : packagesList){
-            for(Attribute a : e.getAttributes()){
-                if(a.getName().equals("type")) {
-                    if(a.getValue().equals(repositoryType)) {
-                        e.addContent(new Element(this.tagRepository).setAttribute("path",repositoryURL));
-                        return;
-                    }
-                }
-            }
-        }
+    	
+    	Element repo = new Element("repository").setAttribute(new Attribute("type", repositoryType));
+    	repo.addContent(new Element("source").setAttribute("path",repositoryURL));
+    	
+    	this.image.addContent(repo);
     }
 
     public Element fileRepresentationRoot(){

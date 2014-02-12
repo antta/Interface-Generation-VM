@@ -77,9 +77,9 @@ public class LineMode {
 	}
 	
 	private void addRepository(String command){
-		String repositoryArg = command.substring("--addrepository ".length());
+		String repositoryArgs = command.substring("--addrepository ".length());
 		
-		this.parser.getXmlModel().addRepository(repositoryArg, repositoryArg);
+		this.parser.getXmlModel().addRepository(repositoryArgs.split(" ")[0], repositoryArgs.split(" ")[1]);
 		
 	}
 

@@ -2,8 +2,6 @@ package fr.univsavoie.serveurbeta.generationvm.engine;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Collection;
-
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.junit.Test;
