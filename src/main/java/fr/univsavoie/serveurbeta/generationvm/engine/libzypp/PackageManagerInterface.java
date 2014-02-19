@@ -7,11 +7,11 @@ import java.util.ArrayList;
  *
  * Created by patrick-edouard on 2/14/14.
  */
-public class PackageManagerInsterace {
+public class PackageManagerInterface {
 
     private PackageManager packageManager;
 
-    public PackageManagerInsterace(){
+    public PackageManagerInterface(){
         this.packageManager = ZypperImplementation.getInstance();
     }
 

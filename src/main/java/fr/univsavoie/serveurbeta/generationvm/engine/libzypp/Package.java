@@ -17,7 +17,7 @@ public class Package {
     private boolean isInstalled;
 
     public Package(String name, String repository, boolean isInstalled) {
-        this.name = name;
+        this.name = name.trim();
         this.repository = repository;
         this.isInstalled = isInstalled;
     }
