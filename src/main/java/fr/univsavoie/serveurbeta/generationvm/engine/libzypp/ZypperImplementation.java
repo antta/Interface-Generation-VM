@@ -23,8 +23,7 @@ public class ZypperImplementation extends PackageManager{
         return instance;
     }
 
-    @Override
-    public ArrayList<Package> searchPackages(String packageName) {
+    private ArrayList<Package> searchPackages(String packageName) {
         ArrayList<Package> packages = new ArrayList<Package>();
 
         try{
@@ -57,5 +56,25 @@ public class ZypperImplementation extends PackageManager{
         //Process zypper = Runtime.getRuntime().exec("zypper se "+packageName+" -t package -r "+repoName);
         InputStream is = zypper.getInputStream();
         return new Scanner (is);
+    }
+
+    @Override
+    public ArrayList<Package> searchPackages(String packageName, String rootDirectory) {
+        // doesn't use root directory yet
+        return this.searchPackages(packageName);
+    }
+
+    @Override
+    public String searchPackageCSV(String packageName, String rootDirectory) {
+        //doesn't use root directory yet
+        String csv = "";
+
+        for(Package p : this.searchPackages(packageName)){
+            csv+=p.getName()+";";
+        }
+
+        csv.substring(0,csv.length()-1);
+
+        return csv;
     }
 }

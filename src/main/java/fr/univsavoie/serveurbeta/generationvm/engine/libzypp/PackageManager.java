@@ -15,5 +15,6 @@ public abstract class PackageManager {
      * @param packageName
      * @return Packages
      */
-    public abstract ArrayList<Package> searchPackages(String packageName);
+    public abstract ArrayList<Package> searchPackages(String packageName, String rootDirectory);
+    public abstract String searchPackageCSV(String packageName, String rootDirectory);
 }

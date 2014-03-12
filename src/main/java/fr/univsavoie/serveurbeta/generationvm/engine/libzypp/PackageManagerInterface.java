@@ -17,7 +17,7 @@ public class PackageManagerInterface {
 
     public ArrayList<String> getProposedPackagesName(String packageName){
         ArrayList<String> proposedPackagesName = new ArrayList<String>();
-        for(Package p : this.packageManager.searchPackages(packageName)){
+        for(Package p : this.packageManager.searchPackages(packageName,"")){
             proposedPackagesName.add(p.getName());
         }
         return proposedPackagesName;
