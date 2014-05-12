@@ -61,7 +61,7 @@ public class LineMode {
 	}
 
 	private void addPackages(String command){
-		String[] listPackages = (command.substring("--addpackages ".length())).split(" ");
+		String[] listPackages = (command.substring("--addpackages ".length())).split(",");
 		for (String packages : listPackages){
 			this.addPackage("--addpackage "+packages);
 		}
