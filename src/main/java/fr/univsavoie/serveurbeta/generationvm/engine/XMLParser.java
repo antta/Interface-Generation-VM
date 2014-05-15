@@ -104,6 +104,25 @@ public final class XMLParser {
 		return new XMLParser(template);
 	}
 
+    /**
+     * createConfig
+     *
+     * Create a configuration following the given template
+     *
+     * @param file path to an xml config
+     * @return A new instance of XMLParser corresponding to the template
+     */
+    public static XMLParser createConfig(String file){
+
+        XMLParser instance = new XMLParser();
+
+        XMLParser.xmlPath=file;
+
+        instance.open();
+
+        return instance;
+    }
+
 	/**
 	 * save
 	 *

@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Time: 10:59 AM
  * To change this template use File | Settings | File Templates.
  *
- * This class is design to give an line code user interface.
+ * This class is designed to give an line code user interface.
  * The goal is to use the api via an ssh connection to a distant server.
  * Or to be use by jenkins in a line command 'java -jar LineMode [options][args]'
  */
@@ -38,12 +38,12 @@ public class LineMode {
 		}
 	}
 
-	public void displatOption(){
+	public void displayOption(){
 		System.out.print("Usage :" +
 				"\n-h                                  		: Display this help" +
 				"\n-b   --build                        		: Build the appliance, launching ./createAppliance" +
 				"\n ==      template managing        == " +
-				"\n-t   --template   jeos | gnome       	: Create a new configuration with predefined package. (jeos | gnome | (maybe others) )" +
+				"\n-t   --template   jeos | gnome       	: Create a new configuration with predefined package. (jeos | gnome | (maybe others) ). Or a .xmlfile" +
 				"\n ==      package  managing        ==" +
 				"\n--addpackage packageName [packageType] 	: Add the package to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
 				"\n--addpackages listPackages       		: Add all the packages to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
@@ -52,7 +52,7 @@ public class LineMode {
 				"\n--setAuthor author                    	: Set the author name" +
 				"\n--setContact contact                   	: Set your e-mail address" +
 				"\n--setSpecification description         	: Describe your distribution" +
-				"\n");
+                "\n");
 	}
 
 	public final void getCommand() {
@@ -101,6 +101,12 @@ public class LineMode {
 			this.parser.getXmlModel().setSpecification(command.substring("--setSpecification ".length()));
 		}
 		else if(command.startsWith("-t") || command.startsWith(("--template"))){
+            String extension = ".xml";
+            if(command.substring(command.length()-extension.length()).equals(extension)){
+                String file = command.split(" ")[1];
+                this.parser = XMLParser.createConfig(file);
+                return;
+            }
 			String tempName = command.split(" ")[1];
 			int template = 0;
 			if(tempName.equals("jeos")){
@@ -112,7 +118,7 @@ public class LineMode {
 			this.parser = XMLParser.createConfig(template);
 		}
 		else{
-			this.displatOption();
+			this.displayOption();
 		}
 	}
 
