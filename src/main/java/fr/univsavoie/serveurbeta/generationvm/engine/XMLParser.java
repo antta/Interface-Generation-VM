@@ -15,13 +15,8 @@ import org.jdom2.output.XMLOutputter;
 
 
 /**
- * Class XMLParser
- *
- * beta version
- * 
  * Design to be use with XMLModel, using it as a factory
  *
- * @author Patrick-Edouard Roux
  */
 public final class XMLParser {
 
@@ -31,8 +26,6 @@ public final class XMLParser {
 	private static Logger logger = Logger.getLogger(XMLParser.class);
 
 	/**
-	 * XMLParser
-	 *
 	 * Private constructor used by the factories to create new XMLParser
 	 */
 	private XMLParser() {
@@ -40,8 +33,6 @@ public final class XMLParser {
 	}
 	
 	/**
-	 * XMLParser
-	 * 
 	 * Create an XML model using a template
 	 * 
 	 * @param template
@@ -79,8 +70,6 @@ public final class XMLParser {
 	}
 
 	/**
-	 * createEmptyConfig
-	 *
 	 * A factory that create a new empty XML configuration.
 	 *
 	 * @return A new instance of XMLParser
@@ -90,8 +79,6 @@ public final class XMLParser {
 	}
 
 	/**
-	 * createConfig
-	 * 
 	 * Create a configuration following the given template
 	 * 
 	 * @param template <ul>
@@ -105,8 +92,6 @@ public final class XMLParser {
 	}
 
     /**
-     * createConfig
-     *
      * Create a configuration following the given template
      *
      * @param file path to an xml config
@@ -124,8 +109,6 @@ public final class XMLParser {
     }
 
 	/**
-	 * save
-	 *
 	 * Save the current configuration into the concrete xml file.
 	 */
 	public void save(){
@@ -144,8 +127,6 @@ public final class XMLParser {
 	}
 
 	/**
-	 * open
-	 *
 	 * Open the config.xml file that contain the kiwi configuration you want to edit
 	 */
 	public void open(){

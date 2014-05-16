@@ -9,19 +9,18 @@ import org.jdom2.Content;
 import org.jdom2.Element;
 
 /**
- * Created with IntelliJ IDEA.
- * User: patrick-edouard & nicolas
- * Date: 12/2/13
- * Time: 5:43 PM
- * To change this template use File | Settings | File Templates.
- *
- * This class is made to be the representation of the config.xml file.
- *
- * For instance, the following sample was made to generate de vm with
- * Jenkins pre-installed.
- *
- *  @see 'http://doc.opensuse.org/projects/kiwi/schema-doc/'
- *  @see 'http://doc.opensuse.org/projects/kiwi/doc/#sec.description.config.xml'
+ * Created with IntelliJ IDEA.<br/>
+ * User: patrick-edouard & nicolas<br/>
+ * Date: 12/2/13<br/>
+ * Time: 5:43 PM<br/>
+ *<br/>
+ * This class is made to be the representation of the config.xml file.<br/>
+ *<br/>
+ * For instance, the following sample was made to generate de vm with<br/>
+ * Jenkins pre-installed.<br/>
+ *<br/>
+ *  @see 'http://doc.opensuse.org/projects/kiwi/schema-doc/'<br/>
+ *  @see 'http://doc.opensuse.org/projects/kiwi/doc/#sec.description.config.xml'<br/>
  */
 
 public class XMLModel {
@@ -132,8 +131,7 @@ public class XMLModel {
 	 * 		createAllElement();
 	 * 		assignAllAttributes();
 	 * 		addAllContent();
-	 * 
-	 *@author nicolas
+	 *
 	 */
     private final void createTree(){
 
@@ -143,9 +141,8 @@ public class XMLModel {
     }
     
     /**
-     * Create all the element of XML, instanciate all the element of class
-     * 
-     * @author nicolas
+     * Create all the element of XML, instantiate all the element of class
+     *
      */
 	private void createAllElement(){
     	
@@ -178,8 +175,7 @@ public class XMLModel {
 	
 	/**
 	 * add a new attribute in the attribute's list then add list to element
-	 * 
-	 * @author nicolas
+	 *
 	 */
     private void assignAllAttributes(){
     	
@@ -259,8 +255,7 @@ public class XMLModel {
     
     /**
      * add content to element's content list then add content to element
-     * 
-     * @author nicolas
+     *
      */
     private void addAllContent() {
 		

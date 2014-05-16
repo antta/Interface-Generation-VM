@@ -5,15 +5,13 @@ import fr.univsavoie.serveurbeta.generationvm.engine.XMLParser;
 import java.util.Scanner;
 
 /**
- * Created with IntelliJ IDEA.
- * User: patrick-edouard
- * Date: 12/18/13
- * Time: 10:59 AM
- * To change this template use File | Settings | File Templates.
- *
- * This class is designed to give an line code user interface.
- * The goal is to use the api via an ssh connection to a distant server.
- * Or to be use by jenkins in a line command 'java -jar LineMode [options][args]'
+ * Created with IntelliJ IDEA.<br/>
+ * User: patrick-edouard<br/>
+ * Date: 12/18/13<br/>
+ * Time: 10:59 AM<br/>
+ * This class is designed to give an line code user interface.<br/>
+ * The goal is to use the api via an ssh connection to a distant server.<br/>
+ * Or to be use by jenkins in a line command 'java -jar LineMode [options][args]'<br/>
  */
 public class LineMode {
 
@@ -21,17 +19,27 @@ public class LineMode {
 
 	private Scanner input;
 
+    /**
+     * Launch the interactive mode
+     */
 	public LineMode(){
 		this.input = new Scanner(System.in);
 		this.parser = XMLParser.createEmptyConfig();
 		this.interact();
 	}
 
+    /**
+     * Use command line mode
+     * @param args args of the args of the <i>public static void main (String args[])</i> function
+     */
 	public LineMode(String [] args){
 		this.parser = XMLParser.createEmptyConfig();
 		this.treatArgs(args);
 	}
 
+    /**
+     * interactive version
+     */
 	private void interact(){
 		while(true){
 			this.getCommand();
@@ -40,26 +48,33 @@ public class LineMode {
 
 	public void displayOption(){
 		System.out.print("Usage :" +
-				"\n-h                                  		: Display this help" +
-				"\n-b   --build                        		: Build the appliance, launching ./createAppliance" +
-				"\n ==      template managing        == " +
-				"\n-t   --template   jeos | gnome       	: Create a new configuration with predefined package. (jeos | gnome | (maybe others) ). Or a .xmlfile" +
-				"\n ==      package  managing        ==" +
-				"\n--addpackage packageName [packageType] 	: Add the package to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
-				"\n--addpackages listPackages       		: Add all the packages to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
-				"\n--addrepository repoURL repoType 		: Add the package to the configuration. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
-				"\n ==        vm    managing         ==" +
-				"\n--setAuthor author                    	: Set the author name" +
-				"\n--setContact contact                   	: Set your e-mail address" +
-				"\n--setSpecification description         	: Describe your distribution" +
+                "\n-h                                  		: Display this help" +
+                "\n-b   --build                        		: Build the appliance, launching ./createAppliance" +
+                "\n ==      template managing        == " +
+                "\n-t   --template   jeos | gnome       	: Create a new configuration with predefined package. (jeos | gnome | (maybe others) ). Or a .xml file containing the default configuration" +
+                "\n ==      package  managing        ==" +
+                "\n--addpackage packageName [packageType] 	: Add the package to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
+                "\n--addpackages listPackages       		: Add all the packages to the configuration. You could specify the type of package. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
+                "\n--addrepository repoURL repoType 		: Add the package to the configuration. No checks are performed on the pertinence of your package name (may cause kiwi crash if bad name)." +
+                "\n ==        vm    managing         ==" +
+                "\n--setAuthor author                    	: Set the author name" +
+                "\n--setContact contact                   	: Set your e-mail address" +
+                "\n--setSpecification description         	: Describe your distribution" +
                 "\n");
 	}
 
+    /**
+     * Get the command line from the user
+     */
 	public final void getCommand() {
 		String command = this.input.nextLine();
 		treatCommand(command);
 	}
 
+    /**
+     * Add packages to the config.xml file
+     * @param command <i>--addpackages package1name,package2name,package3name,...</i>
+     */
 	private void addPackages(String command){
 		String[] listPackages = (command.substring("--addpackages ".length())).split(",");
 		for (String packages : listPackages){
@@ -67,6 +82,10 @@ public class LineMode {
 		}
 	}
 
+    /**
+     * Add a package to the config.xml file
+     * @param command <i>--addpackage packagename</i>
+     */
 	private void addPackage(String command){
 		String packageName = command.substring("--addpackage ".length());
 		if(packageName.split(" ").length>1){
@@ -75,14 +94,25 @@ public class LineMode {
 			this.parser.getXmlModel().addPackage(command.substring("--addpackage ".length()));
 		}
 	}
-	
+
+    /**
+     * Add a repository to the config.xml file
+     * @param command <i>--addrepository alias url</i>
+     */
 	private void addRepository(String command){
 		String repositoryArgs = command.substring("--addrepository ".length());
-		
-		this.parser.getXmlModel().addRepository(repositoryArgs.split(" ")[0], repositoryArgs.split(" ")[1]);
-		
+		if(repositoryArgs.split(" ").length >= 2)
+		    this.parser.getXmlModel().addRepository(repositoryArgs.split(" ")[0], repositoryArgs.split(" ")[1]);
+		else {
+            displayOption();
+            System.exit(1);
+        }
 	}
 
+    /**
+     * Treat the given command line
+     * @param command a command line like --command parameter
+     */
 	public final void treatCommand(String command){
 		if(command.startsWith("exit")){
 			this.parser.save();
@@ -119,11 +149,16 @@ public class LineMode {
 		}
 		else{
 			this.displayOption();
+            System.exit(1);
 		}
 	}
 
+    /**
+     * Take each argument send each command (--addPackageForExample) to the function that treat it
+     * @param args args of the <i>public static void main (String args[])</i> function
+     */
 	public void treatArgs(String [] args){
-		//--template jeos --addpackage test --addpackage test2 --addpackage test3 bootstrap --setAuthor moi
+		//--template jeos --addpackages test,test2,test3 bootstrap --setAuthor someone
 		String command = "";
 		for (int i = 0; i < args.length; i++) {
 			if(args[i].startsWith("--")){
@@ -140,7 +175,8 @@ public class LineMode {
 	
 	/**
 	 * Get the parser of parser of this view, using it for testing
-	 * @return
+     *
+	 * @return the XML parser
 	 */
 	public XMLParser getParser() {
 		return parser;
