@@ -9,6 +9,7 @@ import java.util.Scanner;
  * User: patrick-edouard<br/>
  * Date: 12/18/13<br/>
  * Time: 10:59 AM<br/>
+ * <br/>
  * This class is designed to give an line code user interface.<br/>
  * The goal is to use the api via an ssh connection to a distant server.<br/>
  * Or to be use by jenkins in a line command 'java -jar LineMode [options][args]'<br/>
@@ -46,6 +47,9 @@ public class LineMode {
 		}
 	}
 
+    /**
+     * Display the help
+     */
 	public void displayOption(){
 		System.out.print("Usage :" +
                 "\n-h                                  		: Display this help" +
