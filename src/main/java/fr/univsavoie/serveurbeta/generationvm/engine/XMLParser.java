@@ -133,6 +133,7 @@ public final class XMLParser {
 		SAXBuilder sxb = new SAXBuilder();
 		try {
 			this.root = sxb.build(new File(XMLParser.xmlPath)).getRootElement();
+            this.xmlModel.setImage(this.root);
 		} catch (JDOMException e) {
 			logger.error("JDOMException " + e.toString());
 		} catch (IOException e) {

@@ -24,8 +24,12 @@ import org.jdom2.Element;
  */
 
 public class XMLModel {
-	
-	private Element image;
+
+    public void setImage(Element image) {
+        this.image = image;
+    }
+
+    private Element image;
         private Element description;
         	private Element author;
         	private Element contact;
