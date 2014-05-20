@@ -20,7 +20,7 @@ import org.jdom2.output.XMLOutputter;
  */
 public final class XMLParser {
 
-	private static String xmlPath = "config.xml";
+	private static final String xmlPath = "config.xml";
 	private XMLModel xmlModel;
 	private Element root;
 	private static Logger logger = Logger.getLogger(XMLParser.class);
@@ -101,9 +101,7 @@ public final class XMLParser {
 
         XMLParser instance = new XMLParser();
 
-        XMLParser.xmlPath=file;
-
-        instance.open();
+        instance.open(file);
 
         return instance;
     }
@@ -129,10 +127,10 @@ public final class XMLParser {
 	/**
 	 * Open the config.xml file that contain the kiwi configuration you want to edit
 	 */
-	public void open(){
+	public void open(String inputFile){
 		SAXBuilder sxb = new SAXBuilder();
 		try {
-			this.root = sxb.build(new File(XMLParser.xmlPath)).getRootElement();
+			this.root = sxb.build(new File(inputFile)).getRootElement();
             this.xmlModel.setImage(this.root);
 		} catch (JDOMException e) {
 			logger.error("JDOMException " + e.toString());
